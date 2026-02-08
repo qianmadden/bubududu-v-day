@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE BUBU & DUDU ISSUE</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bubu-pink: #ffc2d1;
+            --dudu-brown: #a67c52;
+            --heart-red: #fb6f92;
+            --cream: #fff5f5;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--cream);
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- CUSTOM FLOATING HEADS --- */
+        .floating-bg-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-head {
+            position: absolute;
+            width: 120px; /* Adjust size as needed */
+            opacity: 0.6;
+            animation: floatAcross 25s linear infinite;
+        }
+
+        @keyframes floatAcross {
+            0% { transform: translate(-200px, 100vh) rotate(0deg); }
+            100% { transform: translate(100vw, -200px) rotate(360deg); }
+        }
+
+        /* --- MAGAZINE HEADER --- */
+        .masthead {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 3px double var(--heart-red);
+            margin: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .masthead h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            margin: 0;
+            color: var(--heart-red);
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .sub-mast {
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: var(--dudu-brown);
+        }
+
+        /* --- COVER VIDEO --- */
+        .cover-video-section {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .cover-video-section video {
+            width: 100%;
+            display: block;
+        }
+
+        /* --- PHOTO GALLERY (7 SQUARES) --- */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .editorial-card {
+            background: #fff;
+            padding: 10px 10px 40px 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.4s;
+            border: 1px solid #eee;
+            position: relative;
+        }
+
+        .editorial-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 15px 35px rgba(251, 111, 146, 0.2);
+        }
+
+        .editorial-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block; /* Ensures no gaps */
+        }
+
+        .editorial-card p {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: var(--dudu-brown);
+        }
+
+        .sequence-num {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: var(--heart-red);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        /* --- PROPOSAL --- */
+        .proposal-area {
+            text-align: center;
+            padding: 80px 20px;
+            background: white;
+            margin-top: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .proposal-area h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--heart-red);
+        }
+
+        .btn-wrap {
+            position: relative;
+            width: 300px;
+            height: 100px;
+            margin: 40px auto;
+        }
+
+        button {
+            padding: 15px 45px;
+            border: 2px solid var(--heart-red);
+            background: transparent;
+            color: var(--heart-red);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: absolute;
+        }
+
+        #yesBtn { left: 0; background: var(--heart-red); color: white; }
+        #yesBtn:hover { transform: scale(1.1); }
+        #noBtn { right: 0; }
+
+    </style>
+</head>
+<body>
+
+    <div class="floating-bg-container">
+        <img src="floating-heads.png" class="floating-head" style="left: 10%; animation-delay: 0s;">
+        <img src="floating-heads.png" class="floating-head" style="left: 30%; animation-delay: 5s;">
+        <img src="floating-heads.png" class="floating-head" style="left: 60%; animation-delay: 2s;">
+        <img src="floating-heads.png" class="floating-head" style="left: 80%; animation-delay: 8s;">
+    </div>
+
+    <div class="masthead">
+        <span class="sub-mast">Exclusive Valentine Edition // 2026</span>
+        <h1>The Bubu & Dudu Issue</h1>
+    </div>
+
+    <div class="cover-video-section">
+        <video autoplay muted loop playsinline>
+            <source src="bubududu.MOV" type="video/mp4">
+        </video>
+        <p style="text-align: center; font-style: italic; color: #888; font-size: 0.8rem; margin-top: 10px;">Feature Story: A Sacrifice for Warmth</p>
+    </div>
+
+    <div class="gallery-container">
+        <div class="editorial-card"><div class="sequence-num">1</div><img src="first.jpg" alt="Photo 1"><p>The Impossible Wish</p></div>
+        <div class="editorial-card"><div class="sequence-num">2</div><img src="second.jpg" alt="Photo 2"><p>The Promise</p></div>
+        <div class="editorial-card"><div class="sequence-num">3</div><img src="third.jpg" alt="Photo 3"><p>Pain & Rain</p></div>
+        <div class="editorial-card"><div class="sequence-num">4</div><img src="fourth.jpg" alt="Photo 4"><p>The Healer's Smile</p></div>
+        <div class="editorial-card"><div class="sequence-num">5</div><img src="fifth.jpg" alt="Photo 5"><p>Worth Every Sacrifice</p></div>
+        <div class="editorial-card"><div class="sequence-num">6</div><img src="sixth.jpg" alt="Photo 6"><p>Wrapped in Richness</p></div>
+        <div class="editorial-card"><div class="sequence-num">7</div><img src="seventh.jpg" alt="Photo 7"><p>Forever Warm</p></div>
+    </div>
+
+    <div class="proposal-area" id="finalQuestion">
+        <h2>Will you be my Valentine?</h2>
+        <div class="btn-wrap">
+            <button id="yesBtn" onclick="celebrate()">Yes!</button>
+            <button id="noBtn" onmouseover="moveButton()">你敢</button>
+        </div>
+    </div>
+
+    <script>
+        // HEART BURST LOGIC
+        function celebrate() {
+            const duration = 5 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) {
+              return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+              const timeLeft = animationEnd - Date.now();
+
+              if (timeLeft <= 0) {
+                return clearInterval(interval);
+              }
+
+              const particleCount = 50 * (timeLeft / duration);
+              
+              // HEARTS INSTEAD OF CONFETTI
+              confetti(Object.assign({}, defaults, { 
+                particleCount, 
+                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                shapes: ['heart'],
+                colors: ['#fb6f92', '#ffc2d1', '#ff85a1']
+              }));
+              confetti(Object.assign({}, defaults, { 
+                particleCount, 
+                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                shapes: ['heart'],
+                colors: ['#fb6f92', '#ffc2d1', '#ff85a1']
+              }));
+            }, 250);
+
+            document.getElementById('finalQuestion').innerHTML = `
+                <div style="animation: fadeIn 2s;">
+                    <h1 style="color: var(--heart-red); font-size: 5rem; font-family: 'Playfair Display', serif;">YES! ❤️</h1>
+                    <p style="font-size: 1.5rem; font-style: italic;">Every sacrifice is worth it for us.</p>
+                </div>
+            `;
+        }
+
+        // NO BUTTON LOGIC
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = Math.random() * (window.innerWidth - 150) + 'px';
+            noBtn.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+        }
+    </script>
+</body>
+</html>
