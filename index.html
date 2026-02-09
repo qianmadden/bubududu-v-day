@@ -22,9 +22,8 @@
             overflow-x: hidden;
         }
 
-        /* --- THE FLOATING BACKGROUND --- */
+        /* --- THE FLOATING BACKGROUND (Using vv.jpeg) --- */
         #bg-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-        /* Keeping opacity at 0.6 based on previous request */
         .floating-element { position: absolute; opacity: 0.6; animation: floatUp 30s linear infinite; }
         
         @keyframes floatUp {
@@ -52,10 +51,10 @@
             background: #fff; padding: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        .cover-video-section video { width: 100%; display: block; }
+        .cover-video-section video { width: 100%; display: block; border-radius: 4px; }
         .caption { text-align: center; font-family: 'Playfair Display', serif; font-style: italic; margin-top: 15px; color: var(--dudu-brown); }
 
-        /* The Photo Gallery Grid */
+        /* The Photo Gallery Grid (8 Photos) */
         .gallery {
             max-width: 1200px; margin: 60px auto; padding: 0 20px;
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
@@ -93,22 +92,47 @@
         #yesBtn { left: 0; background: var(--heart-red); color: #fff; }
         #noBtn { right: 0; }
 
-        /* --- SUCCESS PAGE --- */
+        /* --- SUCCESS PAGE (Floating Gallery) --- */
         #success-page {
             display: none; position: fixed; top: 0; left: 0;
             width: 100%; height: 100%; background: #fff;
             z-index: 100; flex-direction: column; align-items: center;
-            justify-content: center; text-align: center; padding: 20px;
+            justify-content: center; text-align: center; overflow: hidden;
         }
 
-        #success-page h1 { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--heart-red); margin-bottom: 30px; }
-        .final-video-container { max-width: 700px; width: 90%; background: #000; padding: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
-        .final-video-container video { width: 100%; display: block; }
+        #success-page h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 5rem; 
+            color: var(--heart-red); 
+            z-index: 10; 
+            margin-bottom: 20px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Container for the 3 special floating photos */
+        .success-gallery {
+            position: absolute; width: 100%; height: 100%;
+            top: 0; left: 0; z-index: 5; pointer-events: none;
+        }
+
+        .floating-photo {
+            position: absolute; width: 300px; 
+            padding: 10px 10px 40px 10px; background: #fff;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            animation: drift 10s ease-in-out infinite alternate;
+        }
+        .floating-photo img { width: 100%; height: auto; display: block; }
+
+        @keyframes drift {
+            from { transform: translate(0, 0) rotate(-5deg); }
+            to { transform: translate(20px, 30px) rotate(5deg); }
+        }
 
         @media (max-width: 800px) {
             .masthead h1 { font-size: 3rem; }
             .btn-box { width: 100%; display: flex; flex-direction: column; gap: 20px; height: auto; }
             button { position: static; width: 100%; }
+            .floating-photo { width: 200px; }
         }
     </style>
 </head>
@@ -129,8 +153,8 @@
         </div>
 
         <div class="cover-video-section">
-            <video autoplay muted loop playsinline>
-                <source src="bubududu.MOV" type="video/mp4">
+            <video autoplay muted loop playsinline poster="first.jpeg">
+                <source src="bubudududu.mov" type="video/mp4">
             </video>
             <p class="caption">Feature Story: A Sacrifice for Warmth</p>
         </div>
@@ -157,12 +181,20 @@
 
     <div id="success-page">
         <h1>YES! ❤️</h1>
-        <div class="final-video-container">
-            <video id="celebrationVideo" controls loop playsinline>
-                <source src="bubudududu.mov" type="video/mp4">
-            </video>
+        <div class="success-gallery">
+            <div class="floating-photo" style="top: 10%; left: 10%; animation-duration: 8s;">
+                <img src="bubududuarrow.jpeg">
+            </div>
+            <div class="floating-photo" style="bottom: 15%; right: 10%; animation-duration: 12s; animation-delay: 2s;">
+                <img src="bubududuold.jpeg">
+            </div>
+            <div class="floating-photo" style="top: 20%; right: 15%; animation-duration: 10s; animation-delay: 1s;">
+                <img src="bubududusunset.jpeg">
+            </div>
         </div>
-        <p style="margin-top: 30px; font-style: italic; font-size: 1.2rem;">Our Cover Story Continues...</p>
+        <p style="z-index: 10; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; margin-top: 20px;">
+            "You are my future."
+        </p>
     </div>
 
     <script>
@@ -176,15 +208,15 @@
         function transitionToSuccess() {
             document.getElementById('main-magazine').style.display = 'none';
             document.getElementById('success-page').style.display = 'flex';
-            const video = document.getElementById('celebrationVideo');
-            video.play();
-            const duration = 10 * 1000;
+            
+            // Heart Burst Animation
+            const duration = 15 * 1000;
             const animationEnd = Date.now() + duration;
             const interval = setInterval(function() {
                 const timeLeft = animationEnd - Date.now();
                 if (timeLeft <= 0) return clearInterval(interval);
                 confetti({
-                    particleCount: 40,
+                    particleCount: 50,
                     startVelocity: 30,
                     spread: 360,
                     origin: { x: Math.random(), y: Math.random() - 0.2 },
@@ -196,5 +228,3 @@
     </script>
 </body>
 </html>
-
-```
