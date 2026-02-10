@@ -138,6 +138,8 @@
 </head>
 <body>
 
+    <audio id="successSong" loop><source src="song.mp3" type="audio/mpeg"></audio>
+
     <div id="bg-wrap">
         <img src="vv.jpeg" class="floating-element" style="left: 10%; width: 100px; animation-duration: 25s;">
         <img src="vv.jpeg" class="floating-element" style="left: 55%; width: 80px; animation-duration: 35s; animation-delay: 4s;">
@@ -177,30 +179,36 @@
             </div>
         </div>
     </div>
-
-    <div id="success-page">
+<div id="success-page">
         <h1>每天愛你多一些 ❤️</h1>
         <div class="success-gallery">
             <div class="floating-photo" style="top: 5%; left: 5%; animation-duration: 9s;">
                 <img src="bubududuarrow.jpeg">
             </div>
+
             <div class="floating-photo" style="bottom: 10%; right: 5%; animation-duration: 13s; animation-delay: 1s;">
                 <img src="bubududuold.jpeg">
             </div>
-            <div class="floating-photo" style="top: 15%; right: 15%; animation-duration: 11s; animation-delay: 2s;">
+
+            <div class="floating-photo" style="top: 15%; right: 10%; animation-duration: 11s; animation-delay: 2s;">
                 <img src="bubududusunset.jpeg">
             </div>
+
             <div class="floating-photo" style="top: 55%; left: 8%; animation-duration: 14s; animation-delay: 0.5s;">
                 <img src="dudujacket.jpeg">
             </div>
-             <div class="floating-photo" style="bottom: 25%; left: 45%; animation-duration: 10s; animation-delay: 1.5s; z-index: 2;">
+
+             <div class="floating-photo" style="bottom: 20%; left: 20%; animation-duration: 10s; animation-delay: 1.5s; z-index: 2;">
                 <img src="duduprada.jpeg">
-            <div class="floating-photo" style="top: 10%; right: 40%; animation-duration: 13s; animation-delay: 1s; z-index: 2;">
+            </div>
+
+            <div class="floating-photo" style="top: 35%; left: 35%; animation-duration: 15s; animation-delay: 1s; z-index: 3;">
                 <img src="xmas.jpeg">
             </div>
         </div>
+
         <p style="z-index: 10; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; margin-top: 20px; background: rgba(255,255,255,0.8); padding: 10px 20px;">
-            "You are my future."
+            "你就是我這一輩子裡，最想一起陪我去流浪的人"
         </p>
     </div>
 
@@ -213,6 +221,9 @@
         }
 
         function transitionToSuccess() {
+            // 2. PLAY THE SONG HERE
+            document.getElementById('successSong').play();
+            
             document.getElementById('main-magazine').style.display = 'none';
             document.getElementById('success-page').style.display = 'flex';
             
