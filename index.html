@@ -27,8 +27,8 @@
         .floating-element { position: absolute; opacity: 0.6; animation: floatUp 30s linear infinite; }
         
         @keyframes floatUp {
-            0% { transform: translateY(110vh) rotate(0deg); }
-            100% { transform: translateY(-20vh) rotate(360deg); }
+            0% { transform: translateY(110vh); }
+            100% { transform: translateY(-30px); }
         }
 
         /* --- MAIN MAGAZINE PAGE --- */
@@ -121,7 +121,12 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
             animation: drift 12s ease-in-out infinite alternate;
         }
-        .floating-photo img { width: 100%; height: auto; display: block; }
+        .floating-photo img { 
+            width: 100%; 
+            height: 260px; 
+            object-fit: cover;
+            display: block; 
+        }
 
         @keyframes drift {
             from { transform: translate(0, 0) rotate(-4deg); }
