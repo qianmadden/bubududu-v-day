@@ -71,7 +71,18 @@
             font-family: 'Playfair Display', serif; font-style: italic;
             text-align: center; margin-top: 20px; color: var(--dudu-brown);
         }
-
+        /* Adds a small heart to the bottom right of home page polaroids */
+        .card::after {
+        content: '❤';  /* This is the heart icon */
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        color: var(--heart-red);
+        font-size: 1.8rem;
+        opacity: 0.7; /* Makes it slightly see-through so it's not too distracting */
+        transform: rotate(15deg); /* Gives it a cute little tilt */
+        pointer-events: none; /* Ensures it doesn't interfere with clicking */
+        }
         .step-tag {
             position: absolute; top: -10px; left: -10px;
             background: var(--heart-red); color: #fff;
