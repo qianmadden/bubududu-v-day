@@ -45,13 +45,13 @@
             margin: 0; color: var(--heart-red); text-transform: uppercase;
         }
 
-        /* FEATURE STORY SECTION */
-        .cover-video-section {
+        /* FEATURE STORY SECTION (UPDATED for Photo) */
+        .cover-story-section {
             max-width: 800px; margin: 40px auto;
             background: #fff; padding: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        .cover-video-section video { width: 100%; display: block; border-radius: 4px; }
+        .cover-story-section img { width: 100%; display: block; border-radius: 4px; }
         .caption { text-align: center; font-family: 'Playfair Display', serif; font-style: italic; margin-top: 15px; color: var(--dudu-brown); }
 
         /* The Photo Gallery Grid (8 Photos) */
@@ -109,30 +109,30 @@
             text-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-        /* Container for the 3 special floating photos */
+        /* Container for the 5 special floating photos */
         .success-gallery {
             position: absolute; width: 100%; height: 100%;
             top: 0; left: 0; z-index: 5; pointer-events: none;
         }
 
         .floating-photo {
-            position: absolute; width: 300px; 
+            position: absolute; width: 280px; 
             padding: 10px 10px 40px 10px; background: #fff;
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            animation: drift 10s ease-in-out infinite alternate;
+            animation: drift 12s ease-in-out infinite alternate;
         }
         .floating-photo img { width: 100%; height: auto; display: block; }
 
         @keyframes drift {
-            from { transform: translate(0, 0) rotate(-5deg); }
-            to { transform: translate(20px, 30px) rotate(5deg); }
+            from { transform: translate(0, 0) rotate(-4deg); }
+            to { transform: translate(25px, 35px) rotate(4deg); }
         }
 
         @media (max-width: 800px) {
             .masthead h1 { font-size: 3rem; }
             .btn-box { width: 100%; display: flex; flex-direction: column; gap: 20px; height: auto; }
             button { position: static; width: 100%; }
-            .floating-photo { width: 200px; }
+            .floating-photo { width: 180px; } /* Smaller photos on mobile */
         }
     </style>
 </head>
@@ -152,10 +152,8 @@
             <h1>The Bubu & Dudu Issue</h1>
         </div>
 
-        <div class="cover-video-section">
-            <video autoplay muted loop playsinline poster="first.jpeg">
-                <source src="bubudududu.mov" type="video/mp4">
-            </video>
+        <div class="cover-story-section">
+            <img src="qtshoji.jpeg" alt="Cover Story Feature">
             <p class="caption">Feature Story: A Sacrifice for Warmth</p>
         </div>
 
@@ -182,17 +180,23 @@
     <div id="success-page">
         <h1>YES! ❤️</h1>
         <div class="success-gallery">
-            <div class="floating-photo" style="top: 10%; left: 10%; animation-duration: 8s;">
+            <div class="floating-photo" style="top: 5%; left: 5%; animation-duration: 9s;">
                 <img src="bubududuarrow.jpeg">
             </div>
-            <div class="floating-photo" style="bottom: 15%; right: 10%; animation-duration: 12s; animation-delay: 2s;">
+            <div class="floating-photo" style="bottom: 10%; right: 5%; animation-duration: 13s; animation-delay: 1s;">
                 <img src="bubududuold.jpeg">
             </div>
-            <div class="floating-photo" style="top: 20%; right: 15%; animation-duration: 10s; animation-delay: 1s;">
+            <div class="floating-photo" style="top: 15%; right: 15%; animation-duration: 11s; animation-delay: 2s;">
                 <img src="bubududusunset.jpeg">
             </div>
+            <div class="floating-photo" style="top: 55%; left: 8%; animation-duration: 14s; animation-delay: 0.5s;">
+                <img src="dudujacket.jpeg">
+            </div>
+             <div class="floating-photo" style="bottom: 25%; left: 45%; animation-duration: 10s; animation-delay: 1.5s; z-index: 2;">
+                <img src="duduprada.jpeg">
+            </div>
         </div>
-        <p style="z-index: 10; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; margin-top: 20px;">
+        <p style="z-index: 10; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; margin-top: 20px; background: rgba(255,255,255,0.8); padding: 10px 20px;">
             "You are my future."
         </p>
     </div>
