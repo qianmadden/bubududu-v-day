@@ -116,16 +116,23 @@
         }
 
         .floating-photo {
-            position: absolute; width: 280px; 
-            padding: 10px 10px 40px 10px; background: #fff;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            animation: drift 12s ease-in-out infinite alternate;
+    position: absolute; 
+    width: 280px; 
+    padding: 10px 10px 40px 10px; 
+    /* REPLACED background: #fff; WITH GRADIENT BELOW */
+    background: linear-gradient(135deg, var(--heart-red) 0%, #FFD700 60%, var(--bubu-pink) 100%);
+    /* Added a thin metallic gold border edge */
+    border: 2px solid #FFD700; 
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25); /* Made shadow slightly darker for contrast */
+    animation: drift 12s ease-in-out infinite alternate;
         }
         .floating-photo img { 
-            width: 100%; 
-            height: 260px; 
-            object-fit: cover;
-            display: block; 
+    width: 100%; 
+    height: 260px; 
+    object-fit: cover; 
+    display: block;
+    /* ADD THIS LINE for a crisp inner white edge */
+    border: 3px solid #fff; 
         }
 
         @keyframes drift {
