@@ -22,17 +22,52 @@
             overflow-x: hidden;
         }
 
-        /* --- THE FLOATING BACKGROUND (Using vv.jpeg) --- */
+        /* --- 1. FULL PAGE BACKGROUND BANNER --- */
+        .tiffany-banner {
+            position: fixed;
+            top: 45%;
+            left: 0;
+            width: 100vw;
+            background: #ff0000;
+            color: #FFD700;
+            font-weight: 900;
+            font-size: 5rem;
+            padding: 20px 0;
+            z-index: 1; /* Below content, above vv.jpeg */
+            white-space: nowrap;
+            display: flex;
+            overflow: hidden;
+            pointer-events: none;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+        }
+
+        .banner-text {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- 2. THE FLOATING BACKGROUND (vv.jpeg) --- */
         #bg-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .floating-element { position: absolute; opacity: 0.6; animation: floatUp 30s linear infinite; }
         
         @keyframes floatUp {
             0% { transform: translateY(110vh); }
-            100% { transform: translateY(-30px); }
+            100% { transform: translateY(-20vh); }
         }
 
-        /* --- MAIN MAGAZINE PAGE --- */
-        #main-magazine { position: relative; z-index: 10; padding-bottom: 100px; }
+        /* --- 3. MAIN CONTENT LAYER --- */
+        #main-magazine, #success-page {
+            position: relative;
+            z-index: 10; /* Ensures buttons and photos are ABOVE the banner */
+        }
 
         .masthead {
             text-align: center; padding: 50px 20px;
@@ -45,75 +80,26 @@
             margin: 0; color: var(--heart-red); text-transform: uppercase;
         }
 
-        /* --- THE TIFFANY BANNER --- */
+        /* --- 4. COVER STORY CUSTOMIZATION (THE RED BORDER) --- */
         .cover-story-section {
-        position: relative; /* Necessary to put the banner behind */
-        max-width: 800px; 
-        margin: 40px auto;
-        background: #fff; 
-        padding: 15px;
-        /* RED POPPING BORDER */
-        border: 10px solid var(--heart-red); 
-        box-shadow: 0 15px 45px rgba(251, 111, 146, 0.3);
-        overflow: hidden; /* Keeps the banner inside the border */
-        z-index: 10;
+            max-width: 800px; 
+            margin: 40px auto;
+            background: #fff; 
+            padding: 15px;
+            border: 10px solid var(--heart-red); /* RED POPPING BORDER REINSTATED */
+            box-shadow: 0 15px 45px rgba(251, 111, 146, 0.3);
+            border-radius: 4px;
         }
 
-        /* --- FULL PAGE BACKGROUND BANNER --- */
-.tiffany-banner {
-    position: fixed; /* Fixed to the screen */
-    top: 45%;        /* Positioned behind the middle of the page */
-    left: 0;
-    width: 100vw;    /* Full screen width */
-    background: #ff0000; /* Red Banner */
-    color: #FFD700;      /* Gold Text */
-    font-weight: 900;
-    font-size: 5rem;     /* Larger for the background */
-    padding: 20px 0;
-    z-index: 1;          /* Higher than vv.jpeg, but lower than content */
-    white-space: nowrap;
-    display: flex;
-    overflow: hidden;
-    pointer-events: none; /* Allows you to click things "through" it */
-    box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
-}
-
-.banner-text {
-    display: inline-block;
-    animation: marquee 20s linear infinite;
-    font-family: 'Playfair Display', serif;
-    text-transform: uppercase;
-    letter-spacing: 10px;
-}
-
-@keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Smooth loop */
-}
-
-/* Ensure the main magazine content stays on top of the banner */
-#main-magazine, #success-page {
-    position: relative;
-    z-index: 10;
-}
-
-/* Ensure the very background image stays at the very bottom */
-#bg-wrap {
-    z-index: 0;
-}
-
-      /* Ensure the image has a slight transparency or smaller width to see the banner? 
-       Actually, let's keep the image solid but let the banner peek out from the sides! */
         .cover-story-section img {
-        width: 100%;
-        display: block;
-        border-radius: 4px;
-        position: relative;
-        z-index: 1; /* Keeps image in front of banner */
+            width: 100%;
+            display: block;
+            border-radius: 4px;
         }
+
         .caption { text-align: center; font-family: 'Playfair Display', serif; font-style: italic; margin-top: 15px; color: var(--dudu-brown); }
 
-        /* The Photo Gallery Grid (8 Photos) */
+        /* --- 5. GALLERY & POLAROID HEARTS --- */
         .gallery {
             max-width: 1200px; margin: 60px auto; padding: 0 20px;
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
@@ -125,23 +111,21 @@
         }
 
         .card img { width: 100%; height: 350px; object-fit: cover; }
-        
-        .card p {
-            font-family: 'Playfair Display', serif; font-style: italic;
-            text-align: center; margin-top: 20px; color: var(--dudu-brown);
-        }
-        /* Adds a small heart to the bottom right of home page polaroids */
+        .card p { font-family: 'Playfair Display', serif; font-style: italic; text-align: center; margin-top: 20px; color: var(--dudu-brown); }
+
+        /* POLAROID HEARTS REINSTATED */
         .card::after {
-        content: '❤';  /* This is the heart icon */
-        position: absolute;
-        bottom: 15px;
-        right: 15px;
-        color: var(--heart-red);
-        font-size: 1.8rem;
-        opacity: 0.7; /* Makes it slightly see-through so it's not too distracting */
-        transform: rotate(15deg); /* Gives it a cute little tilt */
-        pointer-events: none; /* Ensures it doesn't interfere with clicking */
+            content: '❤';
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            color: var(--heart-red);
+            font-size: 1.8rem;
+            opacity: 0.7;
+            transform: rotate(15deg);
+            pointer-events: none;
         }
+
         .step-tag {
             position: absolute; top: -10px; left: -10px;
             background: var(--heart-red); color: #fff;
@@ -149,7 +133,7 @@
             display: flex; align-items: center; justify-content: center; font-weight: bold;
         }
 
-        /* Buttons */
+        /* --- 6. BUTTONS & PROPOSAL --- */
         .proposal { text-align: center; padding: 60px 20px; }
         .btn-box { position: relative; width: 340px; height: 100px; margin: 40px auto; }
         
@@ -162,7 +146,7 @@
         #yesBtn { left: 0; background: var(--heart-red); color: #fff; }
         #noBtn { right: 0; }
 
-        /* --- SUCCESS PAGE (Floating Gallery) --- */
+        /* --- 7. SUCCESS PAGE & FLOATING PHOTOS --- */
         #success-page {
             display: none; position: fixed; top: 0; left: 0;
             width: 100%; height: 100%; background: #fff;
@@ -171,48 +155,27 @@
         }
 
         #success-page h1 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 5rem; 
-            color: var(--heart-red); 
-            z-index: 10; 
-            margin-bottom: 20px;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--heart-red); z-index: 10; 
         }
 
-        /* Container for the 5 special floating photos */
-        .success-gallery {
-            position: absolute; width: 100%; height: 100%;
-            top: 0; left: 0; z-index: 5; pointer-events: none;
+        .success-gallery { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 5; pointer-events: none; }
+
+        .floating-photo {
+            position: absolute; width: 220px; padding: 8px 8px 30px 8px; 
+            background: linear-gradient(135deg, var(--heart-red) 0%, #FFD700 60%, var(--bubu-pink) 100%);
+            border: 2px solid #FFD700; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: drift 12s ease-in-out infinite alternate;
         }
 
-       .floating-photo {
-    position: absolute; 
-    width: 220px; /* Slightly smaller to fit 14 */
-    padding: 8px 8px 30px 8px; 
-    background: linear-gradient(135deg, var(--heart-red) 0%, #FFD700 60%, var(--bubu-pink) 100%);
-    border: 2px solid #FFD700; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    animation: drift 12s ease-in-out infinite alternate;
-}
+        .floating-photo img { width: 100%; height: 200px; object-fit: cover; display: block; border: 2px solid #fff; }
 
-.floating-photo img { 
-    width: 100%; 
-    height: 200px; /* Kept square/uniform */
-    object-fit: cover; 
-    display: block;
-    border: 2px solid #fff; 
-}
-
-        @keyframes drift {
-            from { transform: translate(0, 0) rotate(-4deg); }
-            to { transform: translate(25px, 35px) rotate(4deg); }
-        }
+        @keyframes drift { from { transform: translate(0, 0) rotate(-4deg); } to { transform: translate(25px, 35px) rotate(4deg); } }
 
         @media (max-width: 800px) {
             .masthead h1 { font-size: 3rem; }
             .btn-box { width: 100%; display: flex; flex-direction: column; gap: 20px; height: auto; }
             button { position: static; width: 100%; }
-            .floating-photo { width: 180px; } /* Smaller photos on mobile */
+            .floating-photo { width: 180px; }
         }
     </style>
 </head>
@@ -226,24 +189,23 @@
         <div class="banner-text">
             I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp;
         </div>
-        
-        <img src="vv.jpeg" class="floating-element" style="left: 10%; width: 100px; animation-duration: 25s; animation-delay: 1s;">
+    </div>
+
+    <div id="bg-wrap">
+        <img src="vv.jpeg" class="floating-element" style="left: 10%; width: 100px; animation-duration: 25s;">
         <img src="vv.jpeg" class="floating-element" style="left: 55%; width: 80px; animation-duration: 35s; animation-delay: 2s;">
         <img src="vv.jpeg" class="floating-element" style="left: 30%; width: 140px; animation-duration: 40s; animation-delay: 1s;">
-        <img src="vv.jpeg" class="floating-element" style="left: 80%; width: 110px; animation-duration: 28s; animation-delay: 1s;">
+        <img src="vv.jpeg" class="floating-element" style="left: 80%; width: 110px; animation-duration: 28s;">
         <img src="vv.jpeg" class="floating-element" style="left: 70%; width: 120px; animation-duration: 32s; animation-delay: 2s;">
     </div>
 
-   <div id="bg-wrap"> ... </div>
-    <div id="main-magazine"> ... </div>
+    <div id="main-magazine">
         <div class="masthead">
             <span style="font-weight: bold; letter-spacing: 4px; color: var(--dudu-brown);">THE EXCLUSIVE VALENTINES EDITION // 2026</span>
             <h1>The Bubu & Dudu Issue</h1>
         </div>
 
         <div class="cover-story-section">
-            
-    </div>
             <img src="shoji22.jpeg" alt="Cover Story Feature">
             <p class="caption">有你在，我每一天都覺得，我很辛福，很開心，很感恩，謝謝您 ❤️ </p>
         </div>
@@ -257,7 +219,7 @@
             <div class="card"><div class="step-tag">6</div><img src="sixth.jpeg"><p>The Warmest Reward</p></div>
             <div class="card"><div class="step-tag">7</div><img src="seventh.jpeg"><p>Together Forever</p></div>
             <div class="card"><div class="step-tag">8</div><img src="vdaycard.jpeg"><p>Forever Yours</p></div>
-            <div class="card"><div class="step-tag">9</div><img src="citizenm.jpeg"></p>In our natural habitat LOL eating in a room</p></div>                                                  
+            <div class="card"><div class="step-tag">9</div><img src="citizenm.jpeg"><p>In our natural habitat LOL eating in a room</p></div>
         </div>
 
         <div class="proposal">
@@ -268,34 +230,29 @@
             </div>
         </div>
     </div>
-<div id="success-page">
-    <h1 style="position: relative; z-index: 20;">我會每天愛你多一些 ❤️</h1>
-    
-    <div class="success-gallery">
-        <div class="floating-photo" style="top: 5%; left: 5%; animation-duration: 9s;"><img src="bubududuarrow.jpeg"></div>
-        <div class="floating-photo" style="top: 2%; left: 15%; animation-duration: 11s; animation-delay: 1s;"><img src="bars.jpeg"></div>
-        <div class="floating-photo" style="top: 5%; left: 70%; animation-duration: 10s; animation-delay: 2s;"><img src="bubududusunset.jpeg"></div>
-        
-        <div class="floating-photo" style="top: 25%; left: 15%; animation-duration: 14s; animation-delay: 0.5s;"><img src="bday.jpeg"></div>
-        <div class="floating-photo" style="top: 22%; left: 50%; animation-duration: 12s; animation-delay: 3s;"><img src="dumpling.jpeg"></div>
-        <div class="floating-photo" style="top: 28%; left: 80%; animation-duration: 13s; animation-delay: 1.5s;"><img src="kk.jpeg"></div>
 
-        <div class="floating-photo" style="top: 45%; left: 5%; animation-duration: 15s; animation-delay: 4s;"><img src="duduprada.jpeg"></div>
-        <div class="floating-photo" style="top: 42%; left: 35%; animation-duration: 10s; animation-delay: 0.2s; z-index: 10;"><img src="xmas.jpeg"></div>
-        <div class="floating-photo" style="top: 48%; left: 65%; animation-duration: 11s; animation-delay: 2.5s;"><img src="nye.jpeg"></div>
-
-        <div class="floating-photo" style="top: 65%; left: 20%; animation-duration: 14s; animation-delay: 1.2s;"><img src="yoga.jpeg"></div>
-        <div class="floating-photo" style="top: 68%; left: 50%; animation-duration: 12s; animation-delay: 0.8s;"><img src="bilt.jpeg"></div>
-        <div class="floating-photo" style="top: 62%; left: 85%; animation-duration: 13s; animation-delay: 2.2s;"><img src="bubududuold.jpeg"></div>
-
-        <div class="floating-photo" style="top: 75%; left: 5%; animation-duration: 11s; animation-delay: 1.8s;"><img src="dudujacket.jpeg"></div>
-        <div class="floating-photo" style="top: 82%; left: 75%; animation-duration: 14s; animation-delay: 3.5s;"><img src="florence.jpeg"></div>
+    <div id="success-page">
+        <h1 style="position: relative; z-index: 20;">我會每天愛你多一些 ❤️</h1>
+        <div class="success-gallery">
+            <div class="floating-photo" style="top: 5%; left: 5%; animation-duration: 9s;"><img src="bubududuarrow.jpeg"></div>
+            <div class="floating-photo" style="top: 2%; left: 15%; animation-duration: 11s; animation-delay: 1s;"><img src="bars.jpeg"></div>
+            <div class="floating-photo" style="top: 5%; left: 70%; animation-duration: 10s; animation-delay: 2s;"><img src="bubududusunset.jpeg"></div>
+            <div class="floating-photo" style="top: 25%; left: 15%; animation-duration: 14s; animation-delay: 0.5s;"><img src="bday.jpeg"></div>
+            <div class="floating-photo" style="top: 22%; left: 50%; animation-duration: 12s; animation-delay: 3s;"><img src="dumpling.jpeg"></div>
+            <div class="floating-photo" style="top: 28%; left: 80%; animation-duration: 13s; animation-delay: 1.5s;"><img src="kk.jpeg"></div>
+            <div class="floating-photo" style="top: 45%; left: 5%; animation-duration: 15s; animation-delay: 4s;"><img src="duduprada.jpeg"></div>
+            <div class="floating-photo" style="top: 42%; left: 35%; animation-duration: 10s; animation-delay: 0.2s; z-index: 10;"><img src="xmas.jpeg"></div>
+            <div class="floating-photo" style="top: 48%; left: 65%; animation-duration: 11s; animation-delay: 2.5s;"><img src="nye.jpeg"></div>
+            <div class="floating-photo" style="top: 65%; left: 20%; animation-duration: 14s; animation-delay: 1.2s;"><img src="yoga.jpeg"></div>
+            <div class="floating-photo" style="top: 68%; left: 50%; animation-duration: 12s; animation-delay: 0.8s;"><img src="bilt.jpeg"></div>
+            <div class="floating-photo" style="top: 62%; left: 85%; animation-duration: 13s; animation-delay: 2.2s;"><img src="bubududuold.jpeg"></div>
+            <div class="floating-photo" style="top: 75%; left: 5%; animation-duration: 11s; animation-delay: 1.8s;"><img src="dudujacket.jpeg"></div>
+            <div class="floating-photo" style="top: 82%; left: 75%; animation-duration: 14s; animation-delay: 3.5s;"><img src="florence.jpeg"></div>
+        </div>
+        <p style="z-index: 20; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; margin-top: 20px; background: rgba(255,255,255,0.8); padding: 10px 20px; border-radius: 50px;">
+            "你是我這一輩子裡，最想陪我去流浪的人"
+        </p>
     </div>
-
-    <p style="z-index: 20; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; margin-top: 20px; background: rgba(255,255,255,0.8); padding: 10px 20px; border-radius: 50px;">
-        "你是我這一輩子裡，最想陪我去流浪的人""
-    </p>
-</div>
 
     <script>
         function moveNo() {
@@ -306,13 +263,10 @@
         }
 
         function transitionToSuccess() {
-            // 2. PLAY THE SONG HERE
             document.getElementById('successSong').play();
-            
             document.getElementById('main-magazine').style.display = 'none';
             document.getElementById('success-page').style.display = 'flex';
             
-            // Heart Burst Animation
             const duration = 15 * 1000;
             const animationEnd = Date.now() + duration;
             const interval = setInterval(function() {
