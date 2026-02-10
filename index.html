@@ -59,35 +59,48 @@
         z-index: 10;
         }
 
-        .tiffany-banner {
-        position: absolute;
-        top: 50%; /* Positioned in the middle behind the photo */
-        left: 0;
-        width: 100%;
-        background: #ff0000; /* Bright Red Banner */
-        color: #FFD700; /* Bright Gold Letters */
-        font-weight: 900;
-        font-size: 3rem;
-        padding: 10px 0;
-        z-index: -1; /* Puts it BEHIND the picture */
-        transform: translateY(-50%);
-        white-space: nowrap;
-        display: flex;
-        }
+        /* --- FULL PAGE BACKGROUND BANNER --- */
+.tiffany-banner {
+    position: fixed; /* Fixed to the screen */
+    top: 45%;        /* Positioned behind the middle of the page */
+    left: 0;
+    width: 100vw;    /* Full screen width */
+    background: #ff0000; /* Red Banner */
+    color: #FFD700;      /* Gold Text */
+    font-weight: 900;
+    font-size: 5rem;     /* Larger for the background */
+    padding: 20px 0;
+    z-index: 1;          /* Higher than vv.jpeg, but lower than content */
+    white-space: nowrap;
+    display: flex;
+    overflow: hidden;
+    pointer-events: none; /* Allows you to click things "through" it */
+    box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+}
 
-        .banner-text {
-        display: inline-block;
-        padding-left: 100%;
-        animation: marquee 15s linear infinite;
-        font-family: 'Playfair Display', serif;
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        }
+.banner-text {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+}
 
-        @keyframes marquee {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-100%); }
-        }
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Smooth loop */
+}
+
+/* Ensure the main magazine content stays on top of the banner */
+#main-magazine, #success-page {
+    position: relative;
+    z-index: 10;
+}
+
+/* Ensure the very background image stays at the very bottom */
+#bg-wrap {
+    z-index: 0;
+}
 
       /* Ensure the image has a slight transparency or smaller width to see the banner? 
        Actually, let's keep the image solid but let the banner peek out from the sides! */
@@ -204,10 +217,16 @@
     </style>
 </head>
 <body>
-
     <audio id="successSong" loop><source src="song.mp3" type="audio/mpeg"></audio>
 
-    <div id="bg-wrap">
+    <div class="tiffany-banner">
+        <div class="banner-text">
+            I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp;
+        </div>
+        <div class="banner-text">
+            I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp;
+        </div>
+        
         <img src="vv.jpeg" class="floating-element" style="left: 10%; width: 100px; animation-duration: 25s; animation-delay: 1s;">
         <img src="vv.jpeg" class="floating-element" style="left: 55%; width: 80px; animation-duration: 35s; animation-delay: 2s;">
         <img src="vv.jpeg" class="floating-element" style="left: 30%; width: 140px; animation-duration: 40s; animation-delay: 1s;">
@@ -215,20 +234,15 @@
         <img src="vv.jpeg" class="floating-element" style="left: 70%; width: 120px; animation-duration: 32s; animation-delay: 2s;">
     </div>
 
-    <div id="main-magazine">
+   <div id="bg-wrap"> ... </div>
+    <div id="main-magazine"> ... </div>
         <div class="masthead">
             <span style="font-weight: bold; letter-spacing: 4px; color: var(--dudu-brown);">THE EXCLUSIVE VALENTINES EDITION // 2026</span>
             <h1>The Bubu & Dudu Issue</h1>
         </div>
 
         <div class="cover-story-section">
-    <div class="tiffany-banner">
-        <div class="banner-text">
-            I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN
-        </div>
-        <div class="banner-text">
-            I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN
-        </div>
+            
     </div>
             <img src="shoji22.jpeg" alt="Cover Story Feature">
             <p class="caption">有你在，我每一天都覺得，我很辛福，很開心，很感恩，謝謝您 ❤️ </p>
