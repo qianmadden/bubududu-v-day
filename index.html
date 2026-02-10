@@ -45,13 +45,59 @@
             margin: 0; color: var(--heart-red); text-transform: uppercase;
         }
 
-        /* FEATURE STORY SECTION (UPDATED for Photo) */
+        /* --- THE TIFFANY BANNER --- */
         .cover-story-section {
-            max-width: 800px; margin: 40px auto;
-            background: #fff; padding: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        position: relative; /* Necessary to put the banner behind */
+        max-width: 800px; 
+        margin: 40px auto;
+        background: #fff; 
+        padding: 15px;
+        /* RED POPPING BORDER */
+        border: 10px solid var(--heart-red); 
+        box-shadow: 0 15px 45px rgba(251, 111, 146, 0.3);
+        overflow: hidden; /* Keeps the banner inside the border */
+        z-index: 10;
         }
-        .cover-story-section img { width: 100%; display: block; border-radius: 4px; }
+
+        .tiffany-banner {
+        position: absolute;
+        top: 50%; /* Positioned in the middle behind the photo */
+        left: 0;
+        width: 100%;
+        background: #ff0000; /* Bright Red Banner */
+        color: #FFD700; /* Bright Gold Letters */
+        font-weight: 900;
+        font-size: 3rem;
+        padding: 10px 0;
+        z-index: -1; /* Puts it BEHIND the picture */
+        transform: translateY(-50%);
+        white-space: nowrap;
+        display: flex;
+        }
+
+        .banner-text {
+        display: inline-block;
+        padding-left: 100%;
+        animation: marquee 15s linear infinite;
+        font-family: 'Playfair Display', serif;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        }
+
+        @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+        }
+
+      /* Ensure the image has a slight transparency or smaller width to see the banner? 
+       Actually, let's keep the image solid but let the banner peek out from the sides! */
+        .cover-story-section img {
+        width: 100%;
+        display: block;
+        border-radius: 4px;
+        position: relative;
+        z-index: 1; /* Keeps image in front of banner */
+        }
         .caption { text-align: center; font-family: 'Playfair Display', serif; font-style: italic; margin-top: 15px; color: var(--dudu-brown); }
 
         /* The Photo Gallery Grid (8 Photos) */
