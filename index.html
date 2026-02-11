@@ -28,7 +28,7 @@
             top: 45%;
             left: 0;
             width: 100vw;
-            background: #ff8fa3; /* Soft Rose Pink */
+            background: #ff8fa3;
             z-index: 1;
             white-space: nowrap;
             display: flex;
@@ -47,26 +47,18 @@
             font-family: 'Playfair Display', serif;
             text-transform: uppercase;
             letter-spacing: 10px;
-            color: #fff2a8; /* Champagne Yellow */
+            color: #fff2a8;
             font-weight: 900;
             font-size: 5rem;
             -webkit-text-stroke: 1px #e57373;
         }
 
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes shimmer {
             0%, 100% { filter: brightness(1); text-shadow: 0 0 10px rgba(255, 242, 168, 0.5); }
             50% { filter: brightness(1.3); text-shadow: 0 0 20px rgba(255, 242, 168, 0.8), 0 0 35px white; }
         }
-
-        @keyframes cloudPulse {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(1.08); }
-        }
+        @keyframes cloudPulse { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.08); } }
 
         /* --- 2. TRAILING HEART EFFECT --- */
         .heart-trail {
@@ -77,7 +69,6 @@
             z-index: 9999;
             animation: fadeAndUp 1.5s linear forwards;
         }
-
         @keyframes fadeAndUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
             100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
@@ -86,13 +77,9 @@
         /* --- 3. FLOATING BACKGROUND --- */
         #bg-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .floating-element { position: absolute; opacity: 0.6; animation: floatUp 30s linear infinite; }
-        
-        @keyframes floatUp {
-            0% { transform: translateY(110vh); }
-            100% { transform: translateY(-20vh); }
-        }
+        @keyframes floatUp { 0% { transform: translateY(110vh); } 100% { transform: translateY(-20vh); } }
 
-        /* --- 4. MAGAZINE CONTENT STYLES --- */
+        /* --- 4. MAGAZINE CONTENT REVERTED --- */
         #main-magazine, #success-page { position: relative; z-index: 10; }
 
         .masthead {
@@ -100,44 +87,33 @@
             border-bottom: 3px double var(--heart-red);
             margin: 0 40px;
         }
-
-        .masthead h1 {
-            font-family: 'Playfair Display', serif; font-size: 5rem;
-            margin: 0; color: var(--heart-red); text-transform: uppercase;
-        }
+        .masthead h1 { font-family: 'Playfair Display', serif; font-size: 5rem; margin: 0; color: var(--heart-red); text-transform: uppercase; }
 
         .cover-story-section {
             max-width: 800px; margin: 40px auto; background: #fff; padding: 15px;
             border: 10px solid var(--heart-red); border-radius: 4px;
             box-shadow: 0 15px 45px rgba(251, 111, 146, 0.3);
         }
-
-        .cover-story-section img { width: 100%; display: block; border-radius: 4px; }
+        .cover-story-section img { width: 100%; display: block; }
 
         .gallery {
             max-width: 1200px; margin: 60px auto; padding: 0 20px;
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
         }
 
+        /* REVERTED TO ORIGINAL POLAROID LOOK */
         .card {
             background: #fff; padding: 15px 15px 50px 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #eee; position: relative;
         }
-
         .card img { 
             width: 100%; 
-            height: 300px; /* Uniform height */
+            height: 350px; /* Original taller height */
             object-fit: cover; 
-            object-position: center 20%; /* Prevents beheading by focusing on the top of the photo */
             display: block; 
         }
-        
         .card p { font-family: 'Playfair Display', serif; text-align: center; margin-top: 20px; color: var(--dudu-brown); }
-
-        .card::after {
-            content: '❤'; position: absolute; bottom: 15px; right: 15px;
-            color: var(--heart-red); font-size: 1.8rem; transform: rotate(15deg);
-        }
+        .card::after { content: '❤'; position: absolute; bottom: 15px; right: 15px; color: var(--heart-red); font-size: 1.8rem; transform: rotate(15deg); }
 
         .step-tag {
             position: absolute; top: -10px; left: -10px; background: var(--heart-red);
@@ -145,12 +121,27 @@
             display: flex; align-items: center; justify-content: center; font-weight: bold;
         }
 
-        /* --- 5. SUCCESS PAGE & WHIRLWIND --- */
+        /* --- 5. SUCCESS PAGE & WHIRLWIND RE-ENABLED --- */
         #success-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; z-index: 100; flex-direction: column; align-items: center;
             justify-content: center; text-align: center; overflow: hidden;
         }
+
+        /* SUCCESS HEADING RESTORED + MINI CLOUD/HEART */
+        #success-page h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 5rem; 
+            color: var(--heart-red); 
+            z-index: 20; 
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 50px;
+            border-radius: 100px;
+            box-shadow: 0 10px 30px rgba(251, 111, 146, 0.2);
+        }
+        #success-page h1::before { content: '☁'; position: absolute; left: -20px; top: -10px; font-size: 2.5rem; opacity: 0.5; }
+        #success-page h1::after { content: '❤'; position: absolute; right: -10px; bottom: -5px; font-size: 2rem; color: var(--heart-red); }
 
         .success-gallery { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 5; pointer-events: none; }
 
@@ -159,19 +150,18 @@
             background: linear-gradient(135deg, var(--heart-red) 0%, #FFD700 60%, var(--bubu-pink) 100%);
             border: 2px solid #FFD700; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             opacity: 0;
+            /* WHIRLWIND EFFECT */
             animation: whirlwind 2s ease-out forwards, drift 12s ease-in-out infinite alternate 2s;
         }
-
         .floating-photo img { width: 100%; height: 200px; object-fit: cover; display: block; border: 2px solid #fff; }
 
         @keyframes whirlwind {
             0% { transform: scale(0) rotate(1080deg); opacity: 0; }
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
-
         @keyframes drift { from { transform: translate(0, 0) rotate(-4deg); } to { transform: translate(25px, 35px) rotate(4deg); } }
 
-        /* --- 6. PROPOSAL BUTTONS --- */
+        /* --- 6. BUTTONS --- */
         .proposal { text-align: center; padding: 60px 20px; }
         .btn-box { position: relative; width: 340px; height: 100px; margin: 40px auto; }
         button {
@@ -183,6 +173,7 @@
 
         @media (max-width: 800px) {
             .masthead h1 { font-size: 3rem; }
+            #success-page h1 { font-size: 2.5rem; padding: 15px 30px; }
             .btn-box { width: 100%; height: auto; display: flex; flex-direction: column; gap: 20px; }
             button { position: static; width: 100%; }
             .floating-photo { width: 150px; }
@@ -246,33 +237,32 @@
     </div>
 
     <div id="success-page">
-        <h1 style="position: relative; z-index: 20;">每天愛你多一些 ❤️</h1>
+        <h1>每天愛你多一些 ❤️</h1>
         <div class="success-gallery">
             <div class="floating-photo" style="top: 5%; left: 5%; animation-delay: 0s;"><img src="bubududuarrow.jpeg"></div>
             <div class="floating-photo" style="top: 2%; left: 30%; animation-delay: 0.2s;"><img src="bars.jpeg"></div>
             <div class="floating-photo" style="top: 5%; left: 70%; animation-delay: 0.4s;"><img src="bbb.jpeg"></div>
             <div class="floating-photo" style="top: 25%; left: 20%; animation-delay: 0.6s;"><img src="bday.jpeg"></div>
             <div class="floating-photo" style="top: 22%; left: 50%; animation-delay: 0.8s;"><img src="dumpling.jpeg"></div>
-            <div class="floating-photo" style="top: 28%; left: 80%; animation-delay: 1.0s;"><img src="kk.jpeg"></div>
+            <div class="floating-photo" style="top: 28%; left: 80%; animation-delay: 1s;"><img src="kk.jpeg"></div>
             <div class="floating-photo" style="top: 45%; left: 5%; animation-delay: 1.2s;"><img src="citizenm.jpeg"></div>
             <div class="floating-photo" style="top: 42%; left: 35%; z-index: 10; animation-delay: 1.4s;"><img src="xmas.jpeg"></div>
             <div class="floating-photo" style="top: 42%; left: 65%; animation-delay: 1.6s;"><img src="nye.jpeg"></div>
             <div class="floating-photo" style="top: 65%; left: 20%; animation-delay: 1.8s;"><img src="yoga.jpeg"></div>
-            <div class="floating-photo" style="top: 68%; left: 50%; animation-delay: 2.0s;"><img src="bilt.jpeg"></div>
+            <div class="floating-photo" style="top: 68%; left: 50%; animation-delay: 2s;"><img src="bilt.jpeg"></div>
             <div class="floating-photo" style="top: 62%; left: 85%; animation-delay: 2.2s;"><img src="bubududuold.jpeg"></div>
             <div class="floating-photo" style="top: 75%; left: 5%; animation-delay: 2.4s;"><img src="vdaycard.jpeg"></div>
             <div class="floating-photo" style="top: 72%; left: 70%; animation-delay: 2.6s;"><img src="florence.jpeg"></div>
         </div>
-        <p style="z-index: 20; font-family: 'Playfair Display', serif; background: rgba(255,255,255,0.8); padding: 15px 25px; border-radius: 50px; text-align: center;">
+        <p style="z-index: 20; font-family: 'Playfair Display', serif; background: rgba(255, 255, 255, 0.85); padding: 15px 25px; border-radius: 50px; text-align: center; margin-top: 30px;">
             "你是我這輩子裡，最想陪我去流浪的人" <br> 
             "A year ago, I said I'd wait for you, I took a silent vow <br> 
             I didn't know what to expect, I only know I love you now." <br>
-            <span style="color: var(--heart-red);">Forever, your 貼心小寶貝❤️</span>
+            <span style="color: var(--heart-red); font-weight: bold;">Forever, your 貼心小寶貝❤️</span>
         </p>
     </div>
 
     <script>
-        // TRAILING HEART CURSOR
         document.addEventListener('mousemove', function(e) {
             if (Math.random() < 0.12) {
                 const heart = document.createElement('div');
