@@ -22,26 +22,23 @@
             overflow-x: hidden;
         }
 
-        /* --- 1. THE BREATHING TIFFANY CLOUD BANNER --- */
+        /* --- 1. THE BREATHING SOFT CLOUD BANNER --- */
         .tiffany-banner {
             position: fixed;
             top: 45%;
             left: 0;
             width: 100vw;
-            background: #ff4d6d; /* Bold Rose Pink */
+            background: #ff8fa3; /* Soft Rose Pink */
             z-index: 1;
             white-space: nowrap;
             display: flex;
             overflow: hidden;
             pointer-events: none;
             padding: 60px 0;
-            box-shadow: 0 0 60px rgba(255, 77, 109, 0.4);
+            box-shadow: 0 0 60px rgba(255, 143, 163, 0.4);
             
-            /* CLOUD SHAPE */
             clip-path: url(#cloud-path);
             -webkit-clip-path: url(#cloud-path);
-
-            /* PULSING ANIMATION - Makes the cloud "breathe" */
             animation: cloudPulse 4s ease-in-out infinite;
         }
 
@@ -51,10 +48,10 @@
             font-family: 'Playfair Display', serif;
             text-transform: uppercase;
             letter-spacing: 10px;
-            color: #ffeb3b; /* Vibrant Yellow */
+            color: #fff2a8; /* Champagne Yellow */
             font-weight: 900;
             font-size: 5rem;
-            -webkit-text-stroke: 1px #c9184a;
+            -webkit-text-stroke: 1px #e57373;
         }
 
         @keyframes marquee {
@@ -63,16 +60,31 @@
         }
 
         @keyframes shimmer {
-            0%, 100% { filter: brightness(1); text-shadow: 0 0 10px rgba(255, 235, 59, 0.5); }
-            50% { filter: brightness(1.5); text-shadow: 0 0 25px rgba(255, 235, 59, 1), 0 0 40px white; }
+            0%, 100% { filter: brightness(1); text-shadow: 0 0 10px rgba(255, 242, 168, 0.5); }
+            50% { filter: brightness(1.3); text-shadow: 0 0 20px rgba(255, 242, 168, 0.8), 0 0 35px white; }
         }
 
         @keyframes cloudPulse {
             0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(1.1); } /* Expands vertically slightly */
+            50% { transform: scaleY(1.08); }
         }
 
-        /* --- 2. FLOATING BACKGROUND ELEMENTS --- */
+        /* --- 2. TRAILING HEART EFFECT CSS --- */
+        .heart-trail {
+            position: fixed;
+            color: var(--heart-red);
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: fadeAndUp 1.5s linear forwards;
+        }
+
+        @keyframes fadeAndUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
+        }
+
+        /* --- 3. FLOATING BACKGROUND ELEMENTS --- */
         #bg-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .floating-element { position: absolute; opacity: 0.6; animation: floatUp 30s linear infinite; }
         
@@ -81,7 +93,7 @@
             100% { transform: translateY(-20vh); }
         }
 
-        /* --- 3. MAGAZINE CONTENT STYLES --- */
+        /* --- 4. MAGAZINE CONTENT STYLES --- */
         #main-magazine, #success-page { position: relative; z-index: 10; }
 
         .masthead {
@@ -116,7 +128,6 @@
         .card img { width: 100%; height: 350px; object-fit: cover; }
         .card p { font-family: 'Playfair Display', serif; text-align: center; margin-top: 20px; color: var(--dudu-brown); }
 
-        /* HOME PAGE POLAROID HEARTS */
         .card::after {
             content: '❤'; position: absolute; bottom: 15px; right: 15px;
             color: var(--heart-red); font-size: 1.8rem; transform: rotate(15deg);
@@ -128,7 +139,7 @@
             display: flex; align-items: center; justify-content: center; font-weight: bold;
         }
 
-        /* --- 4. PROPOSAL BUTTONS --- */
+        /* --- 5. BUTTONS & PROPOSAL --- */
         .proposal { text-align: center; padding: 60px 20px; }
         .btn-box { position: relative; width: 340px; height: 100px; margin: 40px auto; }
         
@@ -139,7 +150,7 @@
         #yesBtn { left: 0; background: var(--heart-red); color: #fff; }
         #noBtn { right: 0; color: var(--heart-red); background: transparent; }
 
-        /* --- 5. SUCCESS PAGE & 14 FLOATING PHOTOS --- */
+        /* --- 6. SUCCESS PAGE & 14 FLOATING PHOTOS --- */
         #success-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; z-index: 100; flex-direction: column; align-items: center;
@@ -172,6 +183,7 @@
 </head>
 <body>
     <audio id="successSong" loop><source src="song.mp3" type="audio/mpeg"></audio>
+    <audio id="sparkleSound"><source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg"></audio>
 
     <svg width="0" height="0" style="position:absolute;">
       <defs>
@@ -235,7 +247,7 @@
             <div class="floating-photo" style="top: 5%; left: 5%;"><img src="bubududuarrow.jpeg"></div>
             <div class="floating-photo" style="top: 2%; left: 30%; animation-delay: 1s;"><img src="bars.jpeg"></div>
             <div class="floating-photo" style="top: 5%; left: 70%; animation-delay: 2s;"><img src="bubududusunset.jpeg"></div>
-            <div class="floating-photo" style="top: 25%; left: 25%; animation-delay: 0.5s;"><img src="bday.jpeg"></div>
+            <div class="floating-photo" style="top: 25%; left: 20%; animation-delay: 0.5s;"><img src="bday.jpeg"></div>
             <div class="floating-photo" style="top: 22%; left: 50%; animation-delay: 3s;"><img src="dumpling.jpeg"></div>
             <div class="floating-photo" style="top: 28%; left: 80%; animation-delay: 1.5s;"><img src="kk.jpeg"></div>
             <div class="floating-photo" style="top: 45%; left: 5%; animation-delay: 4s;"><img src="duduprada.jpeg"></div>
@@ -247,12 +259,28 @@
             <div class="floating-photo" style="top: 75%; left: 5%; animation-delay: 1.8s;"><img src="dudujacket.jpeg"></div>
             <div class="floating-photo" style="top: 72%; left: 70%; animation-delay: 3.5s;"><img src="florence.jpeg"></div>
         </div>
-        <p style="z-index: 20; font-family: 'Playfair Display', serif; background: rgba(255,255,255,0.8); padding: 10px 20px; border-radius: 50px;">
-            你是我這一輩子裡，最想陪我去流浪的人 <br> A year ago, I said I'd wait for you, I took a slient vow <br> I'm happy to say I loved you then, and I love you now
+        <p style="z-index: 20; font-family: 'Playfair Display', serif; background: rgba(255,255,255,0.8); padding: 15px 25px; border-radius: 50px; text-align: center;">
+            你是我這一輩子裡，最想陪我去流浪的人 <br> 
+            A year ago, I said I'd wait for you, I took a silent vow <br> 
+            I'm happy to say I loved you then, and I love you now
         </p>
     </div>
 
     <script>
+        // --- HEART TRAIL LOGIC ---
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() < 0.12) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.className = 'heart-trail';
+                heart.style.left = e.clientX + 'px';
+                heart.style.top = e.clientY + 'px';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 1500);
+            }
+        });
+
         function moveNo() {
             const btn = document.getElementById('noBtn');
             btn.style.position = 'fixed';
@@ -261,8 +289,12 @@
         }
 
         function transitionToSuccess() {
-            const audio = document.getElementById('successSong');
-            if(audio) audio.play();
+            // PLAY SPARKLE & SONG
+            const sparkle = document.getElementById('sparkleSound');
+            const song = document.getElementById('successSong');
+            if(sparkle) sparkle.play();
+            if(song) song.play();
+
             document.getElementById('main-magazine').style.display = 'none';
             document.getElementById('success-page').style.display = 'flex';
             
