@@ -60,7 +60,35 @@
         }
         @keyframes cloudPulse { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.08); } }
 
-        /* --- 2. TRAILING HEART EFFECT --- */
+        /* --- 2. FLOATING QT HEARTS CSS --- */
+        .qt-heart {
+            position: absolute;
+            color: var(--heart-red);
+            font-size: 2rem;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 1; /* Behind photos and text */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.4;
+            animation: floatUpDown 6s ease-in-out infinite;
+        }
+
+        .qt-heart::before {
+            content: '❤';
+            position: absolute;
+            font-size: 3.5rem;
+            z-index: -1;
+            color: var(--bubu-pink);
+        }
+
+        @keyframes floatUpDown {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(10deg); }
+        }
+
+        /* --- 3. TRAILING HEART EFFECT --- */
         .heart-trail {
             position: fixed;
             color: var(--heart-red);
@@ -74,12 +102,11 @@
             100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
         }
 
-        /* --- 3. FLOATING BACKGROUND --- */
+        /* --- 4. MAGAZINE CONTENT --- */
         #bg-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .floating-element { position: absolute; opacity: 0.6; animation: floatUp 30s linear infinite; }
         @keyframes floatUp { 0% { transform: translateY(110vh); } 100% { transform: translateY(-20vh); } }
 
-        /* --- 4. MAGAZINE CONTENT REVERTED --- */
         #main-magazine, #success-page { position: relative; z-index: 10; }
 
         .masthead {
@@ -101,17 +128,11 @@
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
         }
 
-        /* REVERTED TO ORIGINAL POLAROID LOOK */
         .card {
             background: #fff; padding: 15px 15px 50px 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #eee; position: relative;
         }
-        .card img { 
-            width: 100%; 
-            height: 350px; /* Original taller height */
-            object-fit: cover; 
-            display: block; 
-        }
+        .card img { width: 100%; height: 350px; object-fit: cover; display: block; }
         .card p { font-family: 'Playfair Display', serif; text-align: center; margin-top: 20px; color: var(--dudu-brown); }
         .card::after { content: '❤'; position: absolute; bottom: 15px; right: 15px; color: var(--heart-red); font-size: 1.8rem; transform: rotate(15deg); }
 
@@ -121,14 +142,13 @@
             display: flex; align-items: center; justify-content: center; font-weight: bold;
         }
 
-        /* --- 5. SUCCESS PAGE & WHIRLWIND RE-ENABLED --- */
+        /* --- 5. SUCCESS PAGE --- */
         #success-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; z-index: 100; flex-direction: column; align-items: center;
             justify-content: center; text-align: center; overflow: hidden;
         }
 
-        /* SUCCESS HEADING RESTORED + MINI CLOUD/HEART */
         #success-page h1 { 
             font-family: 'Playfair Display', serif; 
             font-size: 5rem; 
@@ -150,7 +170,6 @@
             background: linear-gradient(135deg, var(--heart-red) 0%, #FFD700 60%, var(--bubu-pink) 100%);
             border: 2px solid #FFD700; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             opacity: 0;
-            /* WHIRLWIND EFFECT */
             animation: whirlwind 2s ease-out forwards, drift 12s ease-in-out infinite alternate 2s;
         }
         .floating-photo img { width: 100%; height: 200px; object-fit: cover; display: block; border: 2px solid #fff; }
@@ -161,8 +180,6 @@
         }
         @keyframes drift { from { transform: translate(0, 0) rotate(-4deg); } to { transform: translate(25px, 35px) rotate(4deg); } }
 
-        /* --- 6. BUTTONS --- */
-        .proposal { text-align: center; padding: 60px 20px; }
         .btn-box { position: relative; width: 340px; height: 100px; margin: 40px auto; }
         button {
             padding: 18px 50px; border: 3px solid var(--heart-red);
@@ -263,6 +280,7 @@
     </div>
 
     <script>
+        // HEART TRAIL ON MOUSE MOVE
         document.addEventListener('mousemove', function(e) {
             if (Math.random() < 0.12) {
                 const heart = document.createElement('div');
@@ -275,6 +293,22 @@
                 setTimeout(() => heart.remove(), 1500);
             }
         });
+
+        // FUNCTION TO CREATE BACKGROUND QT HEARTS
+        function createQTHearts() {
+            const successPage = document.getElementById('success-page');
+            const letters = ['Q', 'T'];
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'qt-heart';
+                heart.innerHTML = letters[i % 2];
+                heart.style.left = Math.random() * 90 + 'vw';
+                heart.style.top = Math.random() * 90 + 'vh';
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                heart.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
+                successPage.appendChild(heart);
+            }
+        }
 
         function moveNo() {
             const btn = document.getElementById('noBtn');
@@ -291,6 +325,9 @@
             document.getElementById('main-magazine').style.display = 'none';
             document.getElementById('success-page').style.display = 'flex';
             
+            // Create the background floating Q and T hearts
+            createQTHearts();
+
             const duration = 15 * 1000;
             const animationEnd = Date.now() + duration;
             const interval = setInterval(function() {
