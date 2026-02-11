@@ -22,10 +22,10 @@
             overflow-x: hidden;
         }
 
-        /* --- 1. THE BREATHING SOFT CLOUD BANNER (SMALLER VERSION) --- */
+        /* --- 1. THE SLIMMED BREATHING CLOUD BANNER --- */
         .tiffany-banner {
             position: fixed;
-            top: 48%; /* Adjusted slightly for better alignment with the new height */
+            top: 49%; /* Centered for the new height */
             left: 0;
             width: 100vw;
             background: #ff8fa3;
@@ -34,8 +34,8 @@
             display: flex;
             overflow: hidden;
             pointer-events: none;
-            padding: 30px 0; /* THINNER BANNER */
-            box-shadow: 0 0 40px rgba(255, 143, 163, 0.3);
+            padding: 15px 0; /* HALVED FROM 30px */
+            box-shadow: 0 0 30px rgba(255, 143, 163, 0.3);
             clip-path: url(#cloud-path);
             -webkit-clip-path: url(#cloud-path);
             animation: cloudPulse 4s ease-in-out infinite;
@@ -46,40 +46,28 @@
             animation: marquee 20s linear infinite, shimmer 3s ease-in-out infinite;
             font-family: 'Playfair Display', serif;
             text-transform: uppercase;
-            letter-spacing: 8px;
+            letter-spacing: 5px; /* Tighter spacing for smaller text */
             color: #fff2a8;
             font-weight: 900;
-            font-size: 3rem; /* SMALLER TEXT */
-            -webkit-text-stroke: 1px #e57373;
+            font-size: 1.5rem; /* HALVED FROM 3rem */
+            -webkit-text-stroke: 0.5px #e57373;
         }
 
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes shimmer {
-            0%, 100% { filter: brightness(1); text-shadow: 0 0 10px rgba(255, 242, 168, 0.5); }
-            50% { filter: brightness(1.3); text-shadow: 0 0 20px rgba(255, 242, 168, 0.8), 0 0 30px white; }
+            0%, 100% { filter: brightness(1); text-shadow: 0 0 5px rgba(255, 242, 168, 0.5); }
+            50% { filter: brightness(1.3); text-shadow: 0 0 15px rgba(255, 242, 168, 0.8), 0 0 20px white; }
         }
         @keyframes cloudPulse { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.05); } }
 
         /* --- 2. FLOATING & PULSATING BACKGROUND QT HEARTS --- */
         .qt-heart {
-            position: absolute;
-            color: var(--heart-red);
-            font-size: 2rem;
-            font-weight: bold;
-            pointer-events: none;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.4;
-            animation: floatAndPulse 6s ease-in-out infinite;
+            position: absolute; color: var(--heart-red); font-size: 2rem; font-weight: bold;
+            pointer-events: none; z-index: 1; display: flex; align-items: center; justify-content: center;
+            opacity: 0.4; animation: floatAndPulse 6s ease-in-out infinite;
         }
         .qt-heart::before {
-            content: '❤';
-            position: absolute;
-            font-size: 3.5rem;
-            z-index: -1;
-            color: var(--bubu-pink);
+            content: '❤'; position: absolute; font-size: 3.5rem; z-index: -1; color: var(--bubu-pink);
         }
         @keyframes floatAndPulse {
             0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
@@ -88,12 +76,8 @@
 
         /* --- 3. TRAILING HEART EFFECT --- */
         .heart-trail {
-            position: fixed;
-            color: var(--heart-red);
-            font-size: 20px;
-            pointer-events: none;
-            z-index: 9999;
-            animation: fadeAndUp 1.5s linear forwards;
+            position: fixed; color: var(--heart-red); font-size: 20px;
+            pointer-events: none; z-index: 9999; animation: fadeAndUp 1.5s linear forwards;
         }
         @keyframes fadeAndUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
@@ -173,17 +157,12 @@
             5%, 25%, 45%, 65%, 85% { opacity: 0.4; filter: brightness(0.6); } 
         }
 
-        /* --- 6. PROPOSAL & CENTERING FIX --- */
-        .proposal { 
-            text-align: center; padding: 80px 20px; 
-            display: flex; flex-direction: column; align-items: center; 
-        }
-        
+        /* --- 6. PROPOSAL & CENTERING --- */
+        .proposal { text-align: center; padding: 80px 20px; display: flex; flex-direction: column; align-items: center; }
         .proposal h2 {
             font-family: 'Playfair Display', serif; font-size: 2.2rem;
             max-width: 800px; margin: 0 auto 40px auto; text-align: center; line-height: 1.5;
         }
-
         .btn-box { position: relative; width: 340px; height: 100px; margin: 0 auto; display: block; }
         
         button {
@@ -259,7 +238,7 @@
     </div>
 
     <div id="success-page">
-        <h1>my love will dim, but never end</h1>
+        <h1>just like this bar, my love can dim, but never put out for you</h1>
         <div class="success-gallery">
             <div class="floating-photo" style="top: 5%; left: 5%; animation-delay: 0s;"><img src="bubududuarrow.jpeg"></div>
             <div class="floating-photo" style="top: 2%; left: 30%; animation-delay: 0.2s;"><img src="bars.jpeg"></div>
