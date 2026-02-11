@@ -22,34 +22,21 @@
             overflow-x: hidden;
         }
 
-        /* --- 1. THE BREATHING SOFT CLOUD BANNER --- */
+        /* --- 1. BANNER --- */
         .tiffany-banner {
-            position: fixed;
-            top: 45%;
-            left: 0;
-            width: 100vw;
-            background: #ff8fa3;
-            z-index: 1;
-            white-space: nowrap;
-            display: flex;
-            overflow: hidden;
-            pointer-events: none;
-            padding: 60px 0;
+            position: fixed; top: 45%; left: 0; width: 100vw;
+            background: #ff8fa3; z-index: 1; white-space: nowrap;
+            display: flex; overflow: hidden; pointer-events: none; padding: 60px 0;
             box-shadow: 0 0 60px rgba(255, 143, 163, 0.4);
-            clip-path: url(#cloud-path);
-            -webkit-clip-path: url(#cloud-path);
+            clip-path: url(#cloud-path); -webkit-clip-path: url(#cloud-path);
             animation: cloudPulse 4s ease-in-out infinite;
         }
 
         .banner-text {
             display: inline-block;
             animation: marquee 20s linear infinite, shimmer 3s ease-in-out infinite;
-            font-family: 'Playfair Display', serif;
-            text-transform: uppercase;
-            letter-spacing: 10px;
-            color: #fff2a8;
-            font-weight: 900;
-            font-size: 5rem;
+            font-family: 'Playfair Display', serif; text-transform: uppercase;
+            letter-spacing: 10px; color: #fff2a8; font-weight: 900; font-size: 5rem;
             -webkit-text-stroke: 1px #e57373;
         }
 
@@ -60,64 +47,43 @@
         }
         @keyframes cloudPulse { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.08); } }
 
-        /* --- 2. FLOATING & PULSATING BACKGROUND QT HEARTS --- */
+        /* --- 2. QT PULSING HEARTS --- */
         .qt-heart {
-            position: absolute;
-            color: var(--heart-red);
-            font-size: 2rem;
-            font-weight: bold;
-            pointer-events: none;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.4;
-            animation: floatAndPulse 6s ease-in-out infinite;
+            position: absolute; color: var(--heart-red); font-size: 2rem; font-weight: bold;
+            pointer-events: none; z-index: 1; display: flex; align-items: center; justify-content: center;
+            opacity: 0.4; animation: floatAndPulse 6s ease-in-out infinite;
         }
         .qt-heart::before {
-            content: '❤';
-            position: absolute;
-            font-size: 3.5rem;
-            z-index: -1;
-            color: var(--bubu-pink);
+            content: '❤'; position: absolute; font-size: 3.5rem; z-index: -1; color: var(--bubu-pink);
         }
         @keyframes floatAndPulse {
             0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
             50% { transform: translateY(-50px) rotate(15deg) scale(1.4); opacity: 0.6; }
         }
 
-        /* --- 3. TRAILING HEART EFFECT --- */
+        /* --- 3. MOUSE TRAIL --- */
         .heart-trail {
-            position: fixed;
-            color: var(--heart-red);
-            font-size: 20px;
-            pointer-events: none;
-            z-index: 9999;
-            animation: fadeAndUp 1.5s linear forwards;
+            position: fixed; color: var(--heart-red); font-size: 20px;
+            pointer-events: none; z-index: 9999; animation: fadeAndUp 1.5s linear forwards;
         }
         @keyframes fadeAndUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
             100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
         }
 
-        /* --- 4. FLOATING BACKGROUND --- */
+        /* --- 4. LAYOUT --- */
         #bg-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .floating-element { position: absolute; opacity: 0.6; animation: floatUp 30s linear infinite; }
         @keyframes floatUp { 0% { transform: translateY(110vh); } 100% { transform: translateY(-20vh); } }
 
         #main-magazine, #success-page { position: relative; z-index: 10; }
 
-        .masthead {
-            text-align: center; padding: 50px 20px;
-            border-bottom: 3px double var(--heart-red);
-            margin: 0 40px;
-        }
+        .masthead { text-align: center; padding: 50px 20px; border-bottom: 3px double var(--heart-red); margin: 0 40px; }
         .masthead h1 { font-family: 'Playfair Display', serif; font-size: 5rem; margin: 0; color: var(--heart-red); text-transform: uppercase; }
 
         .cover-story-section {
             max-width: 800px; margin: 40px auto; background: #fff; padding: 15px;
-            border: 10px solid var(--heart-red); border-radius: 4px;
-            box-shadow: 0 15px 45px rgba(251, 111, 146, 0.3);
+            border: 10px solid var(--heart-red); border-radius: 4px; box-shadow: 0 15px 45px rgba(251, 111, 146, 0.3);
         }
         .cover-story-section img { width: 100%; display: block; }
 
@@ -148,19 +114,13 @@
         }
 
         #success-page h1 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 3.5rem; /* SMALLER SIZE */
-            color: var(--heart-red); 
-            z-index: 20; 
-            position: relative;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px 50px;
-            border-radius: 100px;
-            box-shadow: 0 10px 30px rgba(251, 111, 146, 0.2);
-            animation: flickerGlow 3s linear infinite; /* INCREASED SPEED */
+            font-family: 'Playfair Display', serif; font-size: 3.2rem; color: var(--heart-red); 
+            z-index: 20; position: relative; background: rgba(255, 255, 255, 0.95);
+            padding: 20px 40px; border-radius: 100px; box-shadow: 0 10px 30px rgba(251, 111, 146, 0.2);
+            animation: flickerGlow 2s linear infinite; /* Faster Flicker */
         }
-        #success-page h1::before { content: '☁'; position: absolute; left: -20px; top: -10px; font-size: 2.5rem; opacity: 0.5; }
-        #success-page h1::after { content: '❤'; position: absolute; right: -10px; bottom: -5px; font-size: 2rem; color: var(--heart-red); }
+        #success-page h1::before { content: '☁'; position: absolute; left: -25px; top: -15px; font-size: 2.5rem; opacity: 0.4; }
+        #success-page h1::after { content: '❤'; position: absolute; right: -15px; bottom: -10px; font-size: 2rem; color: var(--heart-red); }
 
         .success-gallery { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 5; pointer-events: none; }
 
@@ -179,34 +139,23 @@
         }
         @keyframes drift { from { transform: translate(0, 0) rotate(-4deg); } to { transform: translate(25px, 35px) rotate(4deg); } }
 
-        /* INCREASED FLICKER INTENSITY */
         @keyframes flickerGlow {
-            0%, 100% { opacity: 1; filter: brightness(1.2); }
-            5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% { opacity: 1; }
-            10%, 30%, 50%, 70%, 90% { opacity: 0.3; filter: brightness(0.5); }
-            20%, 40%, 60%, 80% { opacity: 0.8; }
+            0%, 100%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% { opacity: 1; filter: brightness(1.1); }
+            5%, 25%, 45%, 65%, 85% { opacity: 0.4; filter: brightness(0.6); } /* Rapid Flickers */
         }
 
-        /* --- 6. PROPOSAL SECTION & CENTERING --- */
+        /* --- 6. PROPOSAL & CENTERING --- */
         .proposal { 
-            text-align: center; 
-            padding: 60px 20px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* ALIGN CHILDREN TO CENTER */
+            text-align: center; padding: 80px 20px; 
+            display: flex; flex-direction: column; align-items: center; 
         }
         
         .proposal h2 {
-            font-family: 'Playfair Display', serif; 
-            font-size: 2.5rem;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto 30px auto;
-            text-align: center;
-            line-height: 1.4;
+            font-family: 'Playfair Display', serif; font-size: 2.2rem;
+            max-width: 800px; margin: 0 auto 40px auto; text-align: center; line-height: 1.5;
         }
 
-        .btn-box { position: relative; width: 340px; height: 100px; margin: 0 auto; }
+        .btn-box { position: relative; width: 340px; height: 100px; margin: 0 auto; display: block; }
         
         button {
             padding: 18px 50px; border: 3px solid var(--heart-red);
@@ -217,7 +166,7 @@
 
         @media (max-width: 800px) {
             .masthead h1 { font-size: 3rem; }
-            #success-page h1 { font-size: 2.2rem; padding: 15px 30px; }
+            #success-page h1 { font-size: 1.8rem; padding: 15px 25px; }
             .btn-box { width: 100%; height: auto; display: flex; flex-direction: column; gap: 20px; }
             button { position: static; width: 100%; }
             .floating-photo { width: 150px; }
@@ -225,8 +174,8 @@
     </style>
 </head>
 <body>
-    <audio id="successSong" loop><source src="song.mp3" type="audio/mpeg"></audio>
-    <audio id="sparkleSound"><source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg"></audio>
+    <audio id="successSong" loop preload="auto"><source src="song.mp3" type="audio/mpeg"></audio>
+    <audio id="sparkleSound" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg"></audio>
 
     <svg width="0" height="0" style="position:absolute;">
       <defs>
@@ -272,7 +221,7 @@
         </div>
 
         <div class="proposal">
-            <h2>I know you have commitment-phobia, but..你想永遠做我主人嗎？</h2>
+            <h2>我知道你有 commitment-phobia, but..你想永遠做我主人嗎？</h2>
             <div class="btn-box">
                 <button id="yesBtn" onclick="transitionToSuccess()">當然啦！</button>
                 <button id="noBtn" onmouseover="moveNo()">活得不耐煩是不是。。</button>
@@ -281,7 +230,7 @@
     </div>
 
     <div id="success-page">
-        <h1>my love will dim, but never end</h1>
+        <h1>my love might dim, but it will never put out for you</h1>
         <div class="success-gallery">
             <div class="floating-photo" style="top: 5%; left: 5%; animation-delay: 0s;"><img src="bubududuarrow.jpeg"></div>
             <div class="floating-photo" style="top: 2%; left: 30%; animation-delay: 0.2s;"><img src="bars.jpeg"></div>
@@ -345,8 +294,14 @@
         function transitionToSuccess() {
             const sparkle = document.getElementById('sparkleSound');
             const song = document.getElementById('successSong');
+            
+            // Audio Trigger
             if(sparkle) sparkle.play();
-            if(song) song.play();
+            if(song) {
+                song.currentTime = 0;
+                song.play().catch(e => console.log("Audio failed:", e));
+            }
+
             document.getElementById('main-magazine').style.display = 'none';
             document.getElementById('success-page').style.display = 'flex';
             
