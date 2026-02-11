@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE LOVE ISSUE: From DUDU to BUBU, with love ❤️ </title>
+    <title>THE LOVE ISSUE: From DUDU to BUBU, with love ❤️</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     
@@ -36,7 +36,6 @@
             pointer-events: none;
             padding: 60px 0;
             box-shadow: 0 0 60px rgba(255, 143, 163, 0.4);
-            
             clip-path: url(#cloud-path);
             -webkit-clip-path: url(#cloud-path);
             animation: cloudPulse 4s ease-in-out infinite;
@@ -69,7 +68,7 @@
             50% { transform: scaleY(1.08); }
         }
 
-        /* --- 2. TRAILING HEART EFFECT CSS --- */
+        /* --- 2. TRAILING HEART EFFECT --- */
         .heart-trail {
             position: fixed;
             color: var(--heart-red);
@@ -84,7 +83,7 @@
             100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
         }
 
-        /* --- 3. FLOATING BACKGROUND ELEMENTS --- */
+        /* --- 3. FLOATING BACKGROUND --- */
         #bg-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .floating-element { position: absolute; opacity: 0.6; animation: floatUp 30s linear infinite; }
         
@@ -125,7 +124,14 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #eee; position: relative;
         }
 
-        .card img { width: 100%; height: 350px; object-fit: cover; }
+        .card img { 
+            width: 100%; 
+            height: 300px; /* Uniform height */
+            object-fit: cover; 
+            object-position: center 20%; /* Prevents beheading by focusing on the top of the photo */
+            display: block; 
+        }
+        
         .card p { font-family: 'Playfair Display', serif; text-align: center; margin-top: 20px; color: var(--dudu-brown); }
 
         .card::after {
@@ -139,25 +145,12 @@
             display: flex; align-items: center; justify-content: center; font-weight: bold;
         }
 
-        /* --- 5. BUTTONS & PROPOSAL --- */
-        .proposal { text-align: center; padding: 60px 20px; }
-        .btn-box { position: relative; width: 340px; height: 100px; margin: 40px auto; }
-        
-        button {
-            padding: 18px 50px; border: 3px solid var(--heart-red);
-            font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; position: absolute;
-        }
-        #yesBtn { left: 0; background: var(--heart-red); color: #fff; }
-        #noBtn { right: 0; color: var(--heart-red); background: transparent; }
-
-        /* --- 6. SUCCESS PAGE & 14 FLOATING PHOTOS --- */
+        /* --- 5. SUCCESS PAGE & WHIRLWIND --- */
         #success-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; z-index: 100; flex-direction: column; align-items: center;
             justify-content: center; text-align: center; overflow: hidden;
         }
-
-        #success-page h1 { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--heart-red); z-index: 10; }
 
         .success-gallery { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 5; pointer-events: none; }
 
@@ -165,19 +158,34 @@
             position: absolute; width: 220px; padding: 8px 8px 30px 8px; 
             background: linear-gradient(135deg, var(--heart-red) 0%, #FFD700 60%, var(--bubu-pink) 100%);
             border: 2px solid #FFD700; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            animation: drift 12s ease-in-out infinite alternate;
+            opacity: 0;
+            animation: whirlwind 2s ease-out forwards, drift 12s ease-in-out infinite alternate 2s;
         }
 
         .floating-photo img { width: 100%; height: 200px; object-fit: cover; display: block; border: 2px solid #fff; }
 
+        @keyframes whirlwind {
+            0% { transform: scale(0) rotate(1080deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
         @keyframes drift { from { transform: translate(0, 0) rotate(-4deg); } to { transform: translate(25px, 35px) rotate(4deg); } }
+
+        /* --- 6. PROPOSAL BUTTONS --- */
+        .proposal { text-align: center; padding: 60px 20px; }
+        .btn-box { position: relative; width: 340px; height: 100px; margin: 40px auto; }
+        button {
+            padding: 18px 50px; border: 3px solid var(--heart-red);
+            font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; position: absolute;
+        }
+        #yesBtn { left: 0; background: var(--heart-red); color: #fff; }
+        #noBtn { right: 0; color: var(--heart-red); background: transparent; }
 
         @media (max-width: 800px) {
             .masthead h1 { font-size: 3rem; }
             .btn-box { width: 100%; height: auto; display: flex; flex-direction: column; gap: 20px; }
             button { position: static; width: 100%; }
             .floating-photo { width: 150px; }
-            .floating-photo img { height: 140px; }
         }
     </style>
 </head>
@@ -194,12 +202,8 @@
     </svg>
 
     <div class="tiffany-banner">
-        <div class="banner-text">
-            I LOVE MY BB &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp; 
-        </div>
-        <div class="banner-text">
-            I LOVE MY BB &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp; 
-        </div>
+        <div class="banner-text">I LOVE MY BB &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp;</div>
+        <div class="banner-text">I LOVE MY BB &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp;</div>
     </div>
 
     <div id="bg-wrap">
@@ -228,7 +232,7 @@
             <div class="card"><div class="step-tag">5</div><img src="sixth.jpeg"><p>A Dream Wrapped in Nylon</p></div>
             <div class="card"><div class="step-tag">6</div><img src="seventh.jpeg"><p>The Warmest Reward</p></div>
             <div class="card"><div class="step-tag">7</div><img src="duduprada.jpeg"><p>Will Always Spoil You</p></div>
-            <div class="card"><div class="step-tag">8</div><img src="dudujacket.jpeg"><p>I Hope You're Worth It<p></div>
+            <div class="card"><div class="step-tag">8</div><img src="dudujacket.jpeg"><p>I Hope You're Worth It</p></div>
             <div class="card"><div class="step-tag">9</div><img src="bubududusunset.jpeg"><p>I Love You</p></div>
         </div>
 
@@ -244,31 +248,31 @@
     <div id="success-page">
         <h1 style="position: relative; z-index: 20;">每天愛你多一些 ❤️</h1>
         <div class="success-gallery">
-            <div class="floating-photo" style="top: 5%; left: 5%;"><img src="bubududuarrow.jpeg"></div>
-            <div class="floating-photo" style="top: 2%; left: 30%; animation-delay: 1s;"><img src="bars.jpeg"></div>
-            <div class="floating-photo" style="top: 5%; left: 70%; animation-delay: 2s;"><img src="bbb.jpeg"></div>
-            <div class="floating-photo" style="top: 25%; left: 20%; animation-delay: 0.5s;"><img src="bday.jpeg"></div>
-            <div class="floating-photo" style="top: 22%; left: 50%; animation-delay: 3s;"><img src="dumpling.jpeg"></div>
-            <div class="floating-photo" style="top: 28%; left: 80%; animation-delay: 1.5s;"><img src="kk.jpeg"></div>
-            <div class="floating-photo" style="top: 45%; left: 5%; animation-delay: 4s;"><img src="citizenm.jpeg"></div>
-            <div class="floating-photo" style="top: 42%; left: 35%; z-index: 10;"><img src="xmas.jpeg"></div>
-            <div class="floating-photo" style="top: 42%; left: 65%; animation-delay: 2.5s;"><img src="nye.jpeg"></div>
-            <div class="floating-photo" style="top: 65%; left: 20%; animation-delay: 1.2s;"><img src="yoga.jpeg"></div>
-            <div class="floating-photo" style="top: 68%; left: 50%; animation-delay: 0.8s;"><img src="bilt.jpeg"></div>
+            <div class="floating-photo" style="top: 5%; left: 5%; animation-delay: 0s;"><img src="bubududuarrow.jpeg"></div>
+            <div class="floating-photo" style="top: 2%; left: 30%; animation-delay: 0.2s;"><img src="bars.jpeg"></div>
+            <div class="floating-photo" style="top: 5%; left: 70%; animation-delay: 0.4s;"><img src="bbb.jpeg"></div>
+            <div class="floating-photo" style="top: 25%; left: 20%; animation-delay: 0.6s;"><img src="bday.jpeg"></div>
+            <div class="floating-photo" style="top: 22%; left: 50%; animation-delay: 0.8s;"><img src="dumpling.jpeg"></div>
+            <div class="floating-photo" style="top: 28%; left: 80%; animation-delay: 1.0s;"><img src="kk.jpeg"></div>
+            <div class="floating-photo" style="top: 45%; left: 5%; animation-delay: 1.2s;"><img src="citizenm.jpeg"></div>
+            <div class="floating-photo" style="top: 42%; left: 35%; z-index: 10; animation-delay: 1.4s;"><img src="xmas.jpeg"></div>
+            <div class="floating-photo" style="top: 42%; left: 65%; animation-delay: 1.6s;"><img src="nye.jpeg"></div>
+            <div class="floating-photo" style="top: 65%; left: 20%; animation-delay: 1.8s;"><img src="yoga.jpeg"></div>
+            <div class="floating-photo" style="top: 68%; left: 50%; animation-delay: 2.0s;"><img src="bilt.jpeg"></div>
             <div class="floating-photo" style="top: 62%; left: 85%; animation-delay: 2.2s;"><img src="bubududuold.jpeg"></div>
-            <div class="floating-photo" style="top: 75%; left: 5%; animation-delay: 1.8s;"><img src="vdaycard.jpeg"></div>
-            <div class="floating-photo" style="top: 72%; left: 70%; animation-delay: 3.5s;"><img src="florence.jpeg"></div>
+            <div class="floating-photo" style="top: 75%; left: 5%; animation-delay: 2.4s;"><img src="vdaycard.jpeg"></div>
+            <div class="floating-photo" style="top: 72%; left: 70%; animation-delay: 2.6s;"><img src="florence.jpeg"></div>
         </div>
-       <p style="z-index: 20; font-family: 'Playfair Display', serif; background: rgba(255,255,255,0.8); padding: 15px 25px; border-radius: 50px; text-align: center;">
-    "你是我這輩子裡，最想陪我去流浪的人" <br> 
-    "A year ago, I said I'd wait for you, I took a silent vow <br> 
-    I didn't know what to expect, I only know I love you now." <br>
-    <span style="color: var(--heart-red);">Forever, your 貼心小寶貝❤️</span>
-</p>
+        <p style="z-index: 20; font-family: 'Playfair Display', serif; background: rgba(255,255,255,0.8); padding: 15px 25px; border-radius: 50px; text-align: center;">
+            "你是我這輩子裡，最想陪我去流浪的人" <br> 
+            "A year ago, I said I'd wait for you, I took a silent vow <br> 
+            I didn't know what to expect, I only know I love you now." <br>
+            <span style="color: var(--heart-red);">Forever, your 貼心小寶貝❤️</span>
+        </p>
     </div>
 
     <script>
-        // --- HEART TRAIL LOGIC ---
+        // TRAILING HEART CURSOR
         document.addEventListener('mousemove', function(e) {
             if (Math.random() < 0.12) {
                 const heart = document.createElement('div');
@@ -290,12 +294,10 @@
         }
 
         function transitionToSuccess() {
-            // PLAY SPARKLE & SONG
             const sparkle = document.getElementById('sparkleSound');
             const song = document.getElementById('successSong');
             if(sparkle) sparkle.play();
             if(song) song.play();
-
             document.getElementById('main-magazine').style.display = 'none';
             document.getElementById('success-page').style.display = 'flex';
             
