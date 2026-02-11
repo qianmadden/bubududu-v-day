@@ -24,30 +24,35 @@
 
         /* --- 1. FULL PAGE BACKGROUND BANNER --- */
         .tiffany-banner {
-            position: fixed;
-            top: 45%;
-            left: 0;
-            width: 100vw;
-            background: #ff0000;
-            color: #FFD700;
-            font-weight: 900;
-            font-size: 5rem;
-            padding: 20px 0;
-            z-index: 1; /* Below content, above vv.jpeg */
-            white-space: nowrap;
-            display: flex;
-            overflow: hidden;
-            pointer-events: none;
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
-        }
+    position: fixed;
+    top: 45%;
+    left: 0;
+    width: 100vw;
+    /* SOFT PINK BACKGROUND */
+    background: #ffdae0; 
+    /* LIGHTER CHAMPAGNE GOLD TEXT */
+    color: #f6e0b5; 
+    font-weight: 900;
+    font-size: 5rem;
+    padding: 20px 0;
+    z-index: 1;
+    white-space: nowrap;
+    display: flex;
+    overflow: hidden;
+    pointer-events: none;
+    /* SOFTENED SHADOW to match pink theme */
+    box-shadow: 0 0 50px rgba(255, 182, 193, 0.4); 
+}
 
         .banner-text {
-            display: inline-block;
-            animation: marquee 20s linear infinite;
-            font-family: 'Playfair Display', serif;
-            text-transform: uppercase;
-            letter-spacing: 10px;
-        }
+    /* Optional: Adds a very subtle darker pink outline to help the light gold pop */
+    text-shadow: 1px 1px 0px rgba(251, 111, 146, 0.5); 
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+}
 
         @keyframes marquee {
             0% { transform: translateX(0); }
@@ -184,10 +189,10 @@
 
     <div class="tiffany-banner">
         <div class="banner-text">
-            I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp;
+            I LOVE TIFFANY SUN &nbsp;&nbsp; 我愛死 TIFFANY SUN &nbsp;&nbsp; JET TA MAY TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp;
         </div>
         <div class="banner-text">
-            I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp;
+            I LOVE TIFFANY SUN &nbsp;&nbsp; 我愛死 TIFFANY SUN &nbsp;&nbsp; JET TA MAY TIFFANY SUN &nbsp;&nbsp; I LOVE TIFFANY SUN &nbsp;&nbsp;
         </div>
     </div>
 
