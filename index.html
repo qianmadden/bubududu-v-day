@@ -23,40 +23,58 @@
         }
 
         /* --- 1. FULL PAGE BACKGROUND BANNER --- */
-       .tiffany-banner {
+     .tiffany-banner {
     position: fixed;
     top: 45%;
     left: 0;
     width: 100vw;
-    /* BOLDER ROSE PINK BACKGROUND */
-    background: #ff4d6d; 
-    /* VIBRANT LEMON YELLOW TEXT */
-    color: #ffeb3b; 
+    background: #ff4d6d; /* Vibrant Rose Pink */
+    color: #ffeb3b;      /* Lemon Yellow */
     font-weight: 900;
-    font-size: 5.5rem; /* Nudged up slightly for more impact */
-    padding: 25px 0;
+    font-size: 5rem;
+    padding: 40px 0;    /* Increased padding to show off the "puffs" */
     z-index: 1;
     white-space: nowrap;
     display: flex;
     overflow: hidden;
     pointer-events: none;
-    /* MATCHING PINK GLOW */
-    box-shadow: 0 0 60px rgba(255, 77, 109, 0.5); 
+    
+    /* THE CLOUD SHAPE: This creates the scalloped edges at top and bottom */
+    clip-path: polygon(
+        0% 25%, 5% 0%, 10% 25%, 15% 0%, 20% 25%, 25% 0%, 30% 25%, 35% 0%, 40% 25%, 45% 0%, 50% 25%, 55% 0%, 60% 25%, 65% 0%, 70% 25%, 75% 0%, 80% 25%, 85% 0%, 90% 25%, 95% 0%, 100% 25%,
+        100% 75%, 95% 100%, 90% 75%, 85% 100%, 80% 75%, 75% 100%, 70% 75%, 65% 100%, 60% 75%, 55% 100%, 50% 75%, 45% 100%, 40% 75%, 35% 100%, 30% 75%, 25% 100%, 20% 75%, 15% 100%, 10% 75%, 5% 100%, 0% 75%
+    );
+    
+    box-shadow: 0 0 60px rgba(255, 77, 109, 0.4);
 }
-
-        .banner-text {
-    /* Adds a subtle deep pink outline to make the yellow extra sharp */
-    -webkit-text-stroke: 2px #c9184a; 
+       .banner-text {
     display: inline-block;
-    animation: marquee 20s linear infinite;
+    /* Combined Animations: 20s for the scroll, 3s for the sparkle */
+    animation: marquee 20s linear infinite, shimmer 3s ease-in-out infinite;
     font-family: 'Playfair Display', serif;
     text-transform: uppercase;
     letter-spacing: 10px;
+    
+    /* Base text style */
+    color: #ffeb3b;
+    -webkit-text-stroke: 1px #c9184a; /* Subtle outline for crispness */
+    text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
 }
-
-        @keyframes marquee {
+           @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
+
+/* --- THE SHIMMER ANIMATION --- */
+@keyframes shimmer {
+    0%, 100% {
+        filter: brightness(1) contrast(1);
+        text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+    }
+    50% {
+        /* This creates the "glow" burst */
+        filter: brightness(1.5) contrast(1.2);
+        text-shadow: 0 0 25px rgba(255, 235, 59, 1), 0 0 40px rgba(255, 255, 255, 0.8);
+    }
         }
 
         /* --- 2. THE FLOATING BACKGROUND (vv.jpeg) --- */
