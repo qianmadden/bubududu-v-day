@@ -22,37 +22,34 @@
             overflow-x: hidden;
         }
 
-        /* --- 1. BACKGROUND ELEMENTS (Z-INDEX: -1) --- */
-        #bg-wrap { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            z-index: -1; /* Pushed to the very back */
-            pointer-events: none; 
-        }
-        
-        .floating-element { 
-            position: absolute; opacity: 0.5; 
-            animation: balloonFloat 8s ease-in-out infinite alternate; 
-        }
-
-        @keyframes balloonFloat {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-100px) rotate(5deg); }
-        }
-
+        /* --- 1. THE TIFFANY BANNER (IN FRONT BUT CLICK-THROUGH) --- */
         .tiffany-banner {
-            position: fixed; top: 49%; left: 0; width: 100vw;
-            background: #ff8fa3; 
-            z-index: -1; /* Pushed to the back so content scrolls OVER it */
-            white-space: nowrap; display: flex; overflow: hidden; pointer-events: none;
-            padding: 15px 0; box-shadow: 0 0 30px rgba(255, 143, 163, 0.3);
-            clip-path: url(#cloud-path); -webkit-clip-path: url(#cloud-path);
+            position: fixed;
+            top: 49%;
+            left: 0;
+            width: 100vw;
+            background: #ff8fa3;
+            z-index: 100; /* Puts it in front of photos */
+            white-space: nowrap;
+            display: flex;
+            overflow: hidden;
+            pointer-events: none; /* Allows you to click the buttons underneath */
+            padding: 15px 0;
+            box-shadow: 0 0 30px rgba(255, 143, 163, 0.4);
+            clip-path: url(#cloud-path);
+            -webkit-clip-path: url(#cloud-path);
             animation: cloudPulse 4s ease-in-out infinite;
         }
 
         .banner-text {
-            display: inline-block; animation: marquee 20s linear infinite, shimmer 3s ease-in-out infinite;
-            font-family: 'Playfair Display', serif; text-transform: uppercase;
-            letter-spacing: 5px; color: #fff2a8; font-weight: 900; font-size: 1.5rem;
+            display: inline-block;
+            animation: marquee 20s linear infinite, shimmer 3s ease-in-out infinite;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #fff2a8;
+            font-weight: 900;
+            font-size: 1.5rem;
             -webkit-text-stroke: 0.5px #e57373;
         }
 
@@ -61,25 +58,45 @@
             0%, 100% { filter: brightness(1); text-shadow: 0 0 5px rgba(255, 242, 168, 0.5); }
             50% { filter: brightness(1.3); text-shadow: 0 0 15px rgba(255, 242, 168, 0.8), 0 0 20px white; }
         }
-        @keyframes cloudPulse { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.05); } }
+        @keyframes cloudPulse { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.08); } }
 
-        /* --- 2. FOREGROUND CONTENT (Z-INDEX: 10) --- */
-        #main-magazine { 
-            position: relative; 
-            z-index: 10; /* Ensures cards are in front of banner/balloons */
+        /* --- 2. FLOATING BALLOONS (IN FRONT) --- */
+        #bg-wrap { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: 99; /* Just behind the banner but in front of photos */
+            pointer-events: none; 
+        }
+        
+        .floating-element { 
+            position: absolute; opacity: 0.6; 
+            animation: balloonFloat 6s ease-in-out infinite alternate; 
         }
 
-        .masthead { 
-            text-align: center; padding: 50px 20px; 
-            border-bottom: 3px double var(--heart-red); margin: 0 40px; 
-            background-color: var(--cream); /* Prevents background bleed-through */
+        @keyframes balloonFloat {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-80px) rotate(5deg); }
+        }
+
+        /* --- 3. HOME PAGE CONTENT --- */
+        #main-magazine { position: relative; z-index: 1; }
+
+        .masthead {
+            text-align: center; padding: 60px 20px;
+            border-bottom: 3px double var(--heart-red);
+            margin: 0 40px;
+        }
+
+        .masthead h1 {
+            font-family: 'Playfair Display', serif; /* RESTORED FONT */
+            font-size: 5rem;
+            font-weight: 900;
+            margin: 0; color: var(--heart-red); text-transform: uppercase;
         }
 
         .cover-story-section {
             max-width: 800px; margin: 40px auto; background: #fff; padding: 15px;
-            border: 10px solid var(--heart-red); border-radius: 4px; 
+            border: 10px solid var(--heart-red); border-radius: 4px;
             box-shadow: 0 15px 45px rgba(251, 111, 146, 0.3);
-            position: relative; z-index: 11;
         }
         .cover-story-section img { width: 100%; display: block; }
 
@@ -90,8 +107,7 @@
 
         .card {
             background: #fff; padding: 15px 15px 50px 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #eee; 
-            position: relative; z-index: 12;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #eee; position: relative;
         }
         .card img { width: 100%; height: 350px; object-fit: cover; display: block; }
         .card p { font-family: 'Playfair Display', serif; text-align: center; margin-top: 20px; color: var(--dudu-brown); }
@@ -103,29 +119,63 @@
             display: flex; align-items: center; justify-content: center; font-weight: bold;
         }
 
-        /* --- 3. SUCCESS PAGE (Z-INDEX: 100) --- */
+        /* --- 4. PROPOSAL & CENTERING --- */
+        .proposal { 
+            text-align: center; padding: 100px 20px; 
+            display: flex; flex-direction: column; align-items: center; width: 100%;
+        }
+        .proposal h2 {
+            font-family: 'Playfair Display', serif; font-size: 2.2rem;
+            max-width: 800px; margin: 0 auto 40px auto; text-align: center; line-height: 1.5;
+        }
+        .btn-box { position: relative; width: 340px; height: 100px; margin: 0 auto; }
+        
+        button {
+            padding: 18px 50px; border: 3px solid var(--heart-red);
+            font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; position: absolute;
+        }
+        #yesBtn { left: 0; background: var(--heart-red); color: #fff; }
+        #noBtn { right: 0; color: var(--heart-red); background: transparent; }
+
+        /* --- 5. SUCCESS PAGE --- */
         #success-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff; z-index: 100; flex-direction: column; align-items: center;
+            background: #fff; z-index: 200; flex-direction: column; align-items: center;
             justify-content: center; text-align: center; overflow: hidden;
         }
 
         #success-page h1 { 
             font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--heart-red); 
             z-index: 20; position: relative; background: rgba(255, 255, 255, 0.95);
-            padding: 8px 25px; border-radius: 100px; box-shadow: 0 4px 12px rgba(251, 111, 146, 0.2);
-            /* UPDATED: Softer, slower flicker */
-            animation: softPulseFlicker 4s ease-in-out infinite; 
+            padding: 10px 25px; border-radius: 100px; box-shadow: 0 10px 30px rgba(251, 111, 146, 0.2);
+            animation: slowFlicker 3s linear infinite; /* SLOWED DOWN FLICKER */
+        }
+        #success-page h1::before { content: '☁'; position: absolute; left: -25px; top: -15px; font-size: 2.5rem; opacity: 0.4; }
+        #success-page h1::after { content: '❤'; position: absolute; right: -15px; bottom: -10px; font-size: 2rem; color: var(--heart-red); }
+
+        @keyframes slowFlicker {
+            0%, 100%, 40%, 60%, 80% { opacity: 1; filter: brightness(1.2); }
+            50%, 70% { opacity: 0.6; filter: brightness(0.8); }
         }
 
-        @keyframes softPulseFlicker {
-            0%, 100%, 40%, 60% { opacity: 1; filter: brightness(1); }
-            50% { opacity: 0.7; filter: brightness(0.8); }
-            52% { opacity: 1; }
-            54% { opacity: 0.8; } /* One quick "glimmer" instead of rapid jitter */
-            56% { opacity: 1; }
-        }
+        .success-gallery { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 5; pointer-events: none; }
 
+        .floating-photo {
+            position: absolute; width: 220px; padding: 8px 8px 30px 8px; 
+            background: linear-gradient(135deg, var(--heart-red) 0%, #FFD700 60%, var(--bubu-pink) 100%);
+            border: 2px solid #FFD700; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            opacity: 0;
+            animation: whirlwind 2s ease-out forwards, drift 12s ease-in-out infinite alternate 2s;
+        }
+        .floating-photo img { width: 100%; height: 200px; object-fit: cover; display: block; border: 2px solid #fff; }
+
+        @keyframes whirlwind {
+            0% { transform: scale(0) rotate(1080deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        @keyframes drift { from { transform: translate(0, 0) rotate(-4deg); } to { transform: translate(25px, 35px) rotate(4deg); } }
+
+        /* --- 6. QT PULSING HEARTS --- */
         .qt-heart {
             position: absolute; color: var(--heart-red); font-size: 2rem; font-weight: bold;
             pointer-events: none; z-index: 1; display: flex; align-items: center; justify-content: center;
@@ -134,13 +184,12 @@
         .qt-heart::before {
             content: '❤'; position: absolute; font-size: 3.5rem; z-index: -1; color: var(--bubu-pink);
         }
-
         @keyframes floatAndPulse {
             0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
             50% { transform: translateY(-50px) rotate(15deg) scale(1.4); opacity: 0.6; }
         }
 
-        /* --- 4. MOUSE TRAIL --- */
+        /* --- 7. MOUSE TRAIL --- */
         .heart-trail {
             position: fixed; color: var(--heart-red); font-size: 20px;
             pointer-events: none; z-index: 9999; animation: fadeAndUp 1.5s linear forwards;
@@ -150,27 +199,9 @@
             100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
         }
 
-        /* --- 5. PROPOSAL & CENTERING --- */
-        .proposal { 
-            text-align: center; padding: 100px 20px; 
-            display: flex; flex-direction: column; align-items: center; width: 100%;
-        }
-        .proposal h2 {
-            font-family: 'Playfair Display', serif; font-size: 2rem;
-            max-width: 800px; margin: 0 auto 40px auto; text-align: center; line-height: 1.5;
-        }
-        .btn-box { position: relative; width: 340px; height: 100px; margin: 0 auto; display: block; }
-        
-        button {
-            padding: 18px 50px; border: 3px solid var(--heart-red);
-            font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; position: absolute;
-        }
-        #yesBtn { left: 0; background: var(--heart-red); color: #fff; }
-        #noBtn { right: 0; color: var(--heart-red); background: transparent; }
-
         @media (max-width: 800px) {
             .masthead h1 { font-size: 3rem; }
-            #success-page h1 { font-size: 1.2rem; padding: 8px 15px; }
+            #success-page h1 { font-size: 1.2rem; padding: 10px 20px; }
             .btn-box { width: 100%; height: auto; display: flex; flex-direction: column; gap: 20px; }
             button { position: static; width: 100%; }
         }
@@ -188,16 +219,16 @@
       </defs>
     </svg>
 
+    <div class="tiffany-banner">
+        <div class="banner-text">I LOVE MY BB &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp;</div>
+        <div class="banner-text">I LOVE MY BB &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp;</div>
+    </div>
+
     <div id="bg-wrap">
         <img src="vv.jpeg" class="floating-element" style="left: 10%; top: 20%; width: 100px; animation-duration: 7s;">
         <img src="vv.jpeg" class="floating-element" style="left: 55%; top: 40%; width: 80px; animation-duration: 9s; animation-delay: 1s;">
         <img src="vv.jpeg" class="floating-element" style="left: 30%; top: 70%; width: 140px; animation-duration: 11s; animation-delay: 2s;">
         <img src="vv.jpeg" class="floating-element" style="left: 80%; top: 15%; width: 110px; animation-duration: 8s;">
-    </div>
-
-    <div class="tiffany-banner">
-        <div class="banner-text">I LOVE MY BB &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp;</div>
-        <div class="banner-text">I LOVE MY BB &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp;</div>
     </div>
 
     <div id="main-magazine">
@@ -308,10 +339,10 @@
             const sparkle = document.getElementById('sparkleSound');
             const song = document.getElementById('successSong');
             
-            if(sparkle) sparkle.play();
+            if(sparkle) sparkle.play().catch(e => console.log("Sound error"));
             if(song) {
                 song.currentTime = 0;
-                song.play().catch(e => console.log("Song blocked by browser"));
+                song.play().catch(e => console.log("Song error"));
             }
 
             document.getElementById('main-magazine').style.display = 'none';
