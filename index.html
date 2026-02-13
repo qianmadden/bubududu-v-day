@@ -22,40 +22,68 @@
             overflow-x: hidden;
         }
 
-        /* --- 1. BACKGROUND ELEMENTS (Pushed Behind Content) --- */
+        /* --- 1. BACKGROUND ELEMENTS (Behind Content) --- */
+        #bg-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        
         .tiffany-banner {
-            position: fixed;
-            top: 49%;
-            left: 0;
-            width: 100vw;
-            background: #ff8fa3;
-            z-index: 1; /* LOWER Z-INDEX: Behind content */
-            white-space: nowrap;
-            display: flex;
-            overflow: hidden;
-            pointer-events: none;
-            padding: 15px 0;
-            box-shadow: 0 0 30px rgba(255, 143, 163, 0.4);
-            clip-path: url(#cloud-path);
-            -webkit-clip-path: url(#cloud-path);
+            position: fixed; top: 49%; left: 0; width: 100vw;
+            background: #ff8fa3; z-index: 1;
+            white-space: nowrap; display: flex; overflow: hidden; pointer-events: none;
+            padding: 15px 0; box-shadow: 0 0 30px rgba(255, 143, 163, 0.4);
+            clip-path: url(#cloud-path); -webkit-clip-path: url(#cloud-path);
             animation: cloudPulse 4s ease-in-out infinite;
         }
 
-        #bg-wrap { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            z-index: 1; /* LOWER Z-INDEX: Behind content */
-            pointer-events: none; 
+        /* --- THE CAMERA ROLL FILM STRIP --- */
+        .film-strip-container {
+            position: fixed;
+            top: 56%; /* Positioned right below the banner */
+            left: 0;
+            width: 100vw;
+            height: 120px;
+            background: #111; /* Film Black */
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            pointer-events: none;
+            border-top: 4px dashed rgba(255,255,255,0.2); /* Sprocket holes top */
+            border-bottom: 4px dashed rgba(255,255,255,0.2); /* Sprocket holes bottom */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .film-track {
+            display: flex;
+            width: calc(200px * 18); /* Width for seamless loop */
+            animation: filmMove 40s linear infinite;
+        }
+
+        .film-frame {
+            width: 160px;
+            height: 100px;
+            margin: 0 10px;
+            background: #222;
+            border: 2px solid #333;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .film-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(0.3) contrast(1.1); /* Vintage film look */
+        }
+
+        @keyframes filmMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         .banner-text {
-            display: inline-block;
-            animation: marquee 20s linear infinite, shimmer 3s ease-in-out infinite;
-            font-family: 'Playfair Display', serif;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: #fff2a8;
-            font-weight: 900;
-            font-size: 1.5rem;
+            display: inline-block; animation: marquee 20s linear infinite, shimmer 3s ease-in-out infinite;
+            font-family: 'Playfair Display', serif; text-transform: uppercase;
+            letter-spacing: 5px; color: #fff2a8; font-weight: 900; font-size: 1.5rem;
             -webkit-text-stroke: 0.5px #e57373;
         }
 
@@ -76,11 +104,8 @@
             100% { transform: translateY(-80px) rotate(5deg); }
         }
 
-        /* --- 2. FOREGROUND CONTENT (Sitting on Top) --- */
-        #main-magazine { 
-            position: relative; 
-            z-index: 10; /* HIGHER Z-INDEX: In front of banner/balloons */
-        }
+        /* --- 2. FOREGROUND CONTENT --- */
+        #main-magazine { position: relative; z-index: 10; }
 
         .masthead {
             text-align: center; padding: 60px 20px;
@@ -90,8 +115,7 @@
 
         .masthead h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 5rem;
-            font-weight: 900;
+            font-size: 5rem; font-weight: 900;
             margin: 0; color: var(--heart-red); text-transform: uppercase;
         }
 
@@ -122,7 +146,7 @@
             display: flex; align-items: center; justify-content: center; font-weight: bold;
         }
 
-        /* --- 3. PROPOSAL & CENTERING --- */
+        /* --- 3. PROPOSAL --- */
         .proposal { 
             text-align: center; padding: 100px 20px; 
             display: flex; flex-direction: column; align-items: center; width: 100%;
@@ -140,7 +164,7 @@
         #yesBtn { left: 0; background: var(--heart-red); color: #fff; }
         #noBtn { right: 0; color: var(--heart-red); background: transparent; }
 
-        /* --- 4. SUCCESS PAGE (Stays on top of everything) --- */
+        /* --- 4. SUCCESS PAGE --- */
         #success-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; z-index: 200; flex-direction: column; align-items: center;
@@ -153,8 +177,6 @@
             padding: 10px 25px; border-radius: 100px; box-shadow: 0 10px 30px rgba(251, 111, 146, 0.2);
             animation: slowFlicker 3s linear infinite;
         }
-        #success-page h1::before { content: '☁'; position: absolute; left: -25px; top: -15px; font-size: 2.5rem; opacity: 0.4; }
-        #success-page h1::after { content: '❤'; position: absolute; right: -15px; bottom: -10px; font-size: 2rem; color: var(--heart-red); }
 
         @keyframes slowFlicker {
             0%, 100%, 40%, 60%, 80% { opacity: 1; filter: brightness(1.2); }
@@ -205,7 +227,8 @@
             #success-page h1 { font-size: 1.2rem; padding: 10px 20px; }
             .btn-box { width: 100%; height: auto; display: flex; flex-direction: column; gap: 20px; }
             button { position: static; width: 100%; }
-            .floating-photo { width: 150px; }
+            .film-strip-container { height: 80px; top: 55%; }
+            .film-frame { width: 100px; height: 60px; }
         }
     </style>
 </head>
@@ -224,6 +247,29 @@
     <div class="tiffany-banner">
         <div class="banner-text">I LOVE MY BB &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp;</div>
         <div class="banner-text">I LOVE MY BB &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp; JE T'AIME TIFFANY SUN &nbsp;&nbsp;</div>
+    </div>
+
+    <div class="film-strip-container">
+        <div class="film-track">
+            <div class="film-frame"><img src="first2.jpeg"></div>
+            <div class="film-frame"><img src="second2.jpeg"></div>
+            <div class="film-frame"><img src="third2.jpeg"></div>
+            <div class="film-frame"><img src="fourth2.jpeg"></div>
+            <div class="film-frame"><img src="sixth2.jpeg"></div>
+            <div class="film-frame"><img src="seventh2.jpeg"></div>
+            <div class="film-frame"><img src="bdarrow.jpeg"></div>
+            <div class="film-frame"><img src="bdcupid.jpeg"></div>
+            <div class="film-frame"><img src="bdbed.jpeg"></div>
+            <div class="film-frame"><img src="first2.jpeg"></div>
+            <div class="film-frame"><img src="second2.jpeg"></div>
+            <div class="film-frame"><img src="third2.jpeg"></div>
+            <div class="film-frame"><img src="fourth2.jpeg"></div>
+            <div class="film-frame"><img src="sixth2.jpeg"></div>
+            <div class="film-frame"><img src="seventh2.jpeg"></div>
+            <div class="film-frame"><img src="bdarrow.jpeg"></div>
+            <div class="film-frame"><img src="bdcupid.jpeg"></div>
+            <div class="film-frame"><img src="bdbed.jpeg"></div>
+        </div>
     </div>
 
     <div id="bg-wrap">
@@ -277,20 +323,20 @@
     <div id="success-page">
         <h1>when life gets dark, I will hold a light for us</h1>
         <div class="success-gallery">
-            <div class="floating-photo" style="top: 5%; left: 5%; animation-delay: 0s;"><img src="bubududuarrow.jpeg"><p>how it started</p></div>
-            <div class="floating-photo" style="top: 2%; left: 30%; animation-delay: 0.2s;"><img src="bars.jpeg"><p>first bar together!</p></div>
-            <div class="floating-photo" style="top: 5%; left: 70%; animation-delay: 0.4s;"><img src="bbb.jpeg"><p>first time having my gf nude in public</p></div>
-            <div class="floating-photo" style="top: 25%; left: 20%; animation-delay: 0.6s;"><img src="bday.jpeg"><p>your first balloons</p></div>
-            <div class="floating-photo" style="top: 10%; left: 50%; animation-delay: 0.8s;"><img src="dumpling.jpeg"><p>love eating dumplings in SR</p></div>
-            <div class="floating-photo" style="top: 28%; left: 80%; animation-delay: 1s;"><img src="kk.jpeg"><p>new years eve cuddle (:</p></div>
-            <div class="floating-photo" style="top: 45%; left: 5%; animation-delay: 1.2s;"><img src="citizenm.jpeg"><p>first citizen m together!</p></div>
-            <div class="floating-photo" style="top: 60%; left: 35%; z-index: 10; animation-delay: 1.4s;"><img src="xmas.jpeg"><p>1 year later (:</p></div>
-            <div class="floating-photo" style="top: 42%; left: 65%; animation-delay: 1.6s;"><img src="nye.jpeg"><p>1 year ago (:</p></div>
-            <div class="floating-photo" style="top: 65%; left: 20%; animation-delay: 1.8s;"><img src="yoga.jpeg"><p>my favorite instructor</p></div>
-            <div class="floating-photo" style="top: 68%; left: 50%; animation-delay: 2s;"><img src="bilt.jpeg"><p>The Biltmore! Together (:</p></div>
-            <div class="floating-photo" style="top: 62%; left: 85%; animation-delay: 2.2s;"><img src="bubududuold.jpeg"><p>how it's going to progress</p></div>
-            <div class="floating-photo" style="top: 75%; left: 5%; animation-delay: 2.4s;"><img src="vdaycard.jpeg"><p>love my bb</p></div>
-            <div class="floating-photo" style="top: 72%; left: 70%; animation-delay: 2.6s;"><img src="florence.jpeg"><p>almost fashion twinz</p></div>
+            <div class="floating-photo" style="top: 5%; left: 5%; animation-delay: 0s;"><img src="bubududuarrow.jpeg"></div>
+            <div class="floating-photo" style="top: 2%; left: 30%; animation-delay: 0.2s;"><img src="bars.jpeg"></div>
+            <div class="floating-photo" style="top: 5%; left: 70%; animation-delay: 0.4s;"><img src="bbb.jpeg"></div>
+            <div class="floating-photo" style="top: 25%; left: 20%; animation-delay: 0.6s;"><img src="bday.jpeg"></div>
+            <div class="floating-photo" style="top: 10%; left: 50%; animation-delay: 0.8s;"><img src="dumpling.jpeg"></div>
+            <div class="floating-photo" style="top: 28%; left: 80%; animation-delay: 1s;"><img src="kk.jpeg"></div>
+            <div class="floating-photo" style="top: 45%; left: 5%; animation-delay: 1.2s;"><img src="citizenm.jpeg"></div>
+            <div class="floating-photo" style="top: 60%; left: 35%; z-index: 10; animation-delay: 1.4s;"><img src="xmas.jpeg"></div>
+            <div class="floating-photo" style="top: 42%; left: 65%; animation-delay: 1.6s;"><img src="nye.jpeg"></div>
+            <div class="floating-photo" style="top: 62%; left: 20%; animation-delay: 1.8s;"><img src="yoga.jpeg"></div>
+            <div class="floating-photo" style="top: 68%; left: 50%; animation-delay: 2s;"><img src="bilt.jpeg"></div>
+            <div class="floating-photo" style="top: 62%; left: 85%; animation-delay: 2.2s;"><img src="bubududuold.jpeg"></div>
+            <div class="floating-photo" style="top: 75%; left: 5%; animation-delay: 2.4s;"><img src="vdaycard.jpeg"></div>
+            <div class="floating-photo" style="top: 72%; left: 70%; animation-delay: 2.6s;"><img src="florence.jpeg"></div>
         </div>
         <p style="z-index: 20; font-family: 'Playfair Display', serif; background: rgba(255, 255, 255, 0.85); padding: 15px 25px; border-radius: 50px; text-align: center; margin-top: 30px;">
             "你是我這輩子裡，最想陪我去流浪的人" <br> 
