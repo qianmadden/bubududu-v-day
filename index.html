@@ -22,23 +22,29 @@
             overflow-x: hidden;
         }
 
-        /* --- 1. THE TIFFANY BANNER (IN FRONT BUT CLICK-THROUGH) --- */
+        /* --- 1. BACKGROUND ELEMENTS (Pushed Behind Content) --- */
         .tiffany-banner {
             position: fixed;
             top: 49%;
             left: 0;
             width: 100vw;
             background: #ff8fa3;
-            z-index: 100; /* Puts it in front of photos */
+            z-index: 1; /* LOWER Z-INDEX: Behind content */
             white-space: nowrap;
             display: flex;
             overflow: hidden;
-            pointer-events: none; /* Allows you to click the buttons underneath */
+            pointer-events: none;
             padding: 15px 0;
             box-shadow: 0 0 30px rgba(255, 143, 163, 0.4);
             clip-path: url(#cloud-path);
             -webkit-clip-path: url(#cloud-path);
             animation: cloudPulse 4s ease-in-out infinite;
+        }
+
+        #bg-wrap { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: 1; /* LOWER Z-INDEX: Behind content */
+            pointer-events: none; 
         }
 
         .banner-text {
@@ -60,13 +66,6 @@
         }
         @keyframes cloudPulse { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.08); } }
 
-        /* --- 2. FLOATING BALLOONS (IN FRONT) --- */
-        #bg-wrap { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            z-index: 99; /* Just behind the banner but in front of photos */
-            pointer-events: none; 
-        }
-        
         .floating-element { 
             position: absolute; opacity: 0.6; 
             animation: balloonFloat 6s ease-in-out infinite alternate; 
@@ -77,8 +76,11 @@
             100% { transform: translateY(-80px) rotate(5deg); }
         }
 
-        /* --- 3. HOME PAGE CONTENT --- */
-        #main-magazine { position: relative; z-index: 1; }
+        /* --- 2. FOREGROUND CONTENT (Sitting on Top) --- */
+        #main-magazine { 
+            position: relative; 
+            z-index: 10; /* HIGHER Z-INDEX: In front of banner/balloons */
+        }
 
         .masthead {
             text-align: center; padding: 60px 20px;
@@ -87,7 +89,7 @@
         }
 
         .masthead h1 {
-            font-family: 'Playfair Display', serif; /* RESTORED FONT */
+            font-family: 'Playfair Display', serif;
             font-size: 5rem;
             font-weight: 900;
             margin: 0; color: var(--heart-red); text-transform: uppercase;
@@ -97,6 +99,7 @@
             max-width: 800px; margin: 40px auto; background: #fff; padding: 15px;
             border: 10px solid var(--heart-red); border-radius: 4px;
             box-shadow: 0 15px 45px rgba(251, 111, 146, 0.3);
+            position: relative; z-index: 11;
         }
         .cover-story-section img { width: 100%; display: block; }
 
@@ -119,7 +122,7 @@
             display: flex; align-items: center; justify-content: center; font-weight: bold;
         }
 
-        /* --- 4. PROPOSAL & CENTERING --- */
+        /* --- 3. PROPOSAL & CENTERING --- */
         .proposal { 
             text-align: center; padding: 100px 20px; 
             display: flex; flex-direction: column; align-items: center; width: 100%;
@@ -137,7 +140,7 @@
         #yesBtn { left: 0; background: var(--heart-red); color: #fff; }
         #noBtn { right: 0; color: var(--heart-red); background: transparent; }
 
-        /* --- 5. SUCCESS PAGE --- */
+        /* --- 4. SUCCESS PAGE (Stays on top of everything) --- */
         #success-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; z-index: 200; flex-direction: column; align-items: center;
@@ -148,7 +151,7 @@
             font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--heart-red); 
             z-index: 20; position: relative; background: rgba(255, 255, 255, 0.95);
             padding: 10px 25px; border-radius: 100px; box-shadow: 0 10px 30px rgba(251, 111, 146, 0.2);
-            animation: slowFlicker 3s linear infinite; /* SLOWED DOWN FLICKER */
+            animation: slowFlicker 3s linear infinite;
         }
         #success-page h1::before { content: '☁'; position: absolute; left: -25px; top: -15px; font-size: 2.5rem; opacity: 0.4; }
         #success-page h1::after { content: '❤'; position: absolute; right: -15px; bottom: -10px; font-size: 2rem; color: var(--heart-red); }
@@ -175,7 +178,6 @@
         }
         @keyframes drift { from { transform: translate(0, 0) rotate(-4deg); } to { transform: translate(25px, 35px) rotate(4deg); } }
 
-        /* --- 6. QT PULSING HEARTS --- */
         .qt-heart {
             position: absolute; color: var(--heart-red); font-size: 2rem; font-weight: bold;
             pointer-events: none; z-index: 1; display: flex; align-items: center; justify-content: center;
@@ -189,7 +191,6 @@
             50% { transform: translateY(-50px) rotate(15deg) scale(1.4); opacity: 0.6; }
         }
 
-        /* --- 7. MOUSE TRAIL --- */
         .heart-trail {
             position: fixed; color: var(--heart-red); font-size: 20px;
             pointer-events: none; z-index: 9999; animation: fadeAndUp 1.5s linear forwards;
@@ -204,6 +205,7 @@
             #success-page h1 { font-size: 1.2rem; padding: 10px 20px; }
             .btn-box { width: 100%; height: auto; display: flex; flex-direction: column; gap: 20px; }
             button { position: static; width: 100%; }
+            .floating-photo { width: 150px; }
         }
     </style>
 </head>
